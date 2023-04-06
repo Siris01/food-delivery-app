@@ -1,1 +1,1 @@
-Boilerplate template for NextJS + TailwindCSS
+# Food delivery application

@@ -1,5 +1,5 @@
 {
-	"name": "nextjs-tw-boilerplate",
+	"name": "food-delivery-app",
 	"version": "0.1.0",
 	"scripts": {
 		"next:dev": "next dev",
@@ -11,6 +11,9 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.10.6",
+		"@mantine/core": "^6.0.6",
+		"@mantine/hooks": "^6.0.6",
 		"next": "13.2.4",
 		"nprogress": "^0.2.0",
 		"react": "18.2.0",
