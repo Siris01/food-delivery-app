@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import { MantineProvider, DEFAULT_THEME } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { Outfit } from 'next/font/google';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -15,11 +15,15 @@ const font = Outfit({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<MantineProvider theme={{
-			primaryColor: 'green',
-			colorScheme: 'dark',
-			fontFamily: 'Outfit, sans-serif',
-		}} withGlobalStyles withNormalizeCSS>
+		<MantineProvider
+			theme={{
+				primaryColor: 'green',
+				colorScheme: 'dark',
+				fontFamily: 'Outfit, sans-serif'
+			}}
+			withGlobalStyles
+			withNormalizeCSS
+		>
 			<Head>
 				<title>FDA</title>
 				<meta property='og:title' content='FDA' />
