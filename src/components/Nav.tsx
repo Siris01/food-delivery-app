@@ -1,4 +1,5 @@
 import Logo from '@components/Logo';
+import { sign } from 'crypto';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -14,13 +15,13 @@ export default function Nav() {
 
 	return (
 		<nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/30 before:border-black'>
-			<div className='relative text-white flex items-center justify-between px-4 py-2 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+			<div className='relative text-white min-h-[96px] flex items-center justify-between px-4 p-2 mx-auto max-w-7xl sm:px-6 lg:px-8'>
 				<div className='flex items-center flex-1'>
-					<Link href='/' className='flex items-center justify-center'>
+					<Link href='/' className='flex items-center justify-center hover:text-primary'>
 						<Logo size={48} />
 						<span className='ml-4 font-bold text-lg'>FDA</span>
 					</Link>
-					<div className='hidden ml-10 space-x-8 lg:block'>
+					<div className='hidden ml-10 space-x-8 md:block'>
 						{links.map((item) => (
 							<Link key={item.href} href={item.href} className='text-lg font-medium hover:text-primary'>
 								{item.title}
@@ -28,15 +29,18 @@ export default function Nav() {
 						))}
 					</div>
 				</div>
-				<div className='hidden lg:flex items-center justify-end lg:justify-center'>
+				<div className='hidden md:flex items-center justify-end md:justify-center'>
+					<Link href='/login' className='font-bold text-lg px-4 p-2 m-2 border-2 border-primary bg-black hover:bg-primary text-white rounded-md'>
+						Login
+					</Link>
 					<Link
-						href='/login'
+						href='/signup'
 						className='font-bold text-lg px-4 p-2 m-2 bg-primary hover:bg-primary/70 text-black rounded-md'
 					>
-						Log In
+						Sign Up
 					</Link>
 				</div>
-				<div className='-mr-2 -my-2 lg:hidden'>
+				<div className='-mr-2 -my-2 md:hidden'>
 					<button
 						onClick={() => setOpen((o) => !o)}
 						type='button'
@@ -57,9 +61,8 @@ export default function Nav() {
 				</div>
 			</div>
 			<div
-				className={`lg:hidden relative bg-slate/30 backdrop-blur-lg backdrop-brightness-25 ${
-					open ? 'translate-y-0' : 'h-0 -translate-y-[400px]'
-				}`}
+				className={`md:hidden relative bg-slate/30 backdrop-blur-lg backdrop-brightness-25 ${open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
+					}`}
 			>
 				<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
 					{links.map((item) => (
@@ -73,14 +76,18 @@ export default function Nav() {
 					))}
 				</div>
 				<div className='px-5 py-4 space-y-4'>
-					<div>
-						<Link
-							href='/login'
-							className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'
-						>
-							Log In
-						</Link>
-					</div>
+					{
+						['Login', 'Sign Up'].map(name => {
+							return (
+								<Link key={name.toLowerCase().replaceAll(' ', '')}
+									href={`/${name.toLowerCase().replaceAll(' ', '')}`}
+									className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'
+								>
+									{name}
+								</Link>
+							)
+						})
+					}
 				</div>
 			</div>
 		</nav>

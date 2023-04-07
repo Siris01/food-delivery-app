@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Home: NextPage = () => {
 	return (
-		<div className='flex flex-col p-4 m-12 mx-6 md:mx-8 lg:mx-12 justify-center items-center'>
+		<div className='flex flex-col p-4 mx-6 md:mx-8 lg:mx-12 justify-center items-center'>
 			<span className='font-extrabold p-2 m-2 text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-[#f12711] to-[#f5af19]'>
 				What food are you craving today?
 			</span>
@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 						<Link
 							href={`/order?cuisine=${cuisine.title.toLowerCase()}`}
 							key={cuisine.title.toLowerCase()}
-							className='flex flex-row justify-center items-center p-4 m-4 bg-black/70 rounded-md cursor-pointer border-2 border-black hover:border-primary'
+							className='flex flex-row justify-center items-center p-4 m-4 bg-black/50 rounded-md cursor-pointer border-2 border-black hover:border-primary'
 						>
 							<Image src={`/icons/${cuisine.icon}.svg`} alt={cuisine.title} width={256} height={256} />
 							<div className='flex flex-col justify-between ml-4'>

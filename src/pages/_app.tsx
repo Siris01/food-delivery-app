@@ -25,9 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 				<meta name='description' content='Food delivery app' />
 			</Head>
-			<main className={font.className}>
+			<main className={`${font.className} min-h-screen`}>
 				<Nav />
-				<Component {...pageProps} />
+				<div className='flex flex-col justify-center' style={{ minHeight: 'calc(100vh - 96px)' }}>
+					<Component {...pageProps} />
+				</div>
 			</main>
 		</>
 	);

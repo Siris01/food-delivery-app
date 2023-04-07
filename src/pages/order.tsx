@@ -15,7 +15,7 @@ export const cuisines = [
 		icon: 'taco',
 		title: 'Mexican',
 		description:
-			'With its complex spice blends and diverse array of vegetarian and non-vegetarian dishes, this cuisine offers a wealth of bold, flavorful options.'
+			'From tangy salsas to crispy tortilla chips to spicy chiles, this cuisine is all about bright, bold flavors that pack a punch.'
 	},
 	{
 		icon: 'ramen',
@@ -27,7 +27,7 @@ export const cuisines = [
 		icon: 'burger',
 		title: 'American',
 		description:
-			'From classNameic burgers and fries to regional specialties like barbecue and seafood, this cuisine is diverse and varied, with a focus on hearty, comforting fare.'
+			'From classic burgers and fries to regional specialties like barbecue and seafood, this cuisine is diverse and varied, with a focus on hearty, comforting fare.'
 	},
 	{
 		icon: 'croissant',
@@ -37,4 +37,5 @@ export const cuisines = [
 	}
 ];
 
-export default function Order() {}
+export default function Order() { }
+//TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
