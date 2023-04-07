@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Home: NextPage = () => {
 	return (
 		<div className='flex flex-col p-4 mx-6 md:mx-8 lg:mx-12 justify-center items-center'>
-			<span className='font-extrabold p-2 m-2 text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-[#f12711] to-[#f5af19]'>
+			<span className='font-extrabold p-2 m-2 text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text animate-text bg-gradient-to-l from-[#f9bc2c] from-0% via-[#FE5001] via-20% to-[#e9295c] to-80%'>
 				What food are you craving today?
 			</span>
 			<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
