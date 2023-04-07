@@ -9,7 +9,7 @@
 	}
 
 	* {
-		@apply transition-all delay-100 ease-in-out;
+		@apply transition-all delay-[50] ease-out;
 	}
 
 	body {
