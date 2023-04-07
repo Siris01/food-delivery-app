@@ -30,7 +30,10 @@ export default function Nav() {
 					</div>
 				</div>
 				<div className='hidden md:flex items-center justify-end md:justify-center'>
-					<Link href='/login' className='font-bold text-lg px-4 p-2 m-2 border-2 border-primary bg-black hover:bg-primary text-white rounded-md'>
+					<Link
+						href='/login'
+						className='font-bold text-lg px-4 p-2 m-2 border-2 border-primary bg-black hover:bg-primary text-white rounded-md'
+					>
 						Login
 					</Link>
 					<Link
@@ -61,8 +64,9 @@ export default function Nav() {
 				</div>
 			</div>
 			<div
-				className={`md:hidden relative bg-slate/30 backdrop-blur-lg backdrop-brightness-25 ${open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
-					}`}
+				className={`md:hidden relative bg-slate/30 backdrop-blur-lg backdrop-brightness-25 ${
+					open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
+				}`}
 			>
 				<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
 					{links.map((item) => (
@@ -76,18 +80,17 @@ export default function Nav() {
 					))}
 				</div>
 				<div className='px-5 py-4 space-y-4'>
-					{
-						['Login', 'Sign Up'].map(name => {
-							return (
-								<Link key={name.toLowerCase().replaceAll(' ', '')}
-									href={`/${name.toLowerCase().replaceAll(' ', '')}`}
-									className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'
-								>
-									{name}
-								</Link>
-							)
-						})
-					}
+					{['Login', 'Sign Up'].map((name) => {
+						return (
+							<Link
+								key={name.toLowerCase().replaceAll(' ', '')}
+								href={`/${name.toLowerCase().replaceAll(' ', '')}`}
+								className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'
+							>
+								{name}
+							</Link>
+						);
+					})}
 				</div>
 			</div>
 		</nav>

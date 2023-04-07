@@ -37,5 +37,5 @@ export const cuisines = [
 	}
 ];
 
-export default function Order() { }
+export default function Order() {}
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
