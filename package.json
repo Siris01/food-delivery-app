@@ -5,8 +5,7 @@
 		"next:dev": "next dev",
 		"tw:dev": "npx tailwindcss -i ./src/styles/tw.css -o ./src/styles/globals.css --watch",
 		"dev": "run-p tw:dev next:dev",
-		"fluent": "node src/utils/generate-fluent-emojis",
-		"build": "node src/utils/generate-fluent-emojis && npx tailwindcss -i ./src/styles/tw.css -o ./src/styles/globals.css --minify && next build",
+		"build": "npx tailwindcss -i ./src/styles/tw.css -o ./src/styles/globals.css --minify && next build",
 		"fmt": "npx prettier --write src",
 		"start": "next start",
 		"lint": "next lint"
