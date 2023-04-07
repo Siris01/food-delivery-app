@@ -57,7 +57,7 @@ export default function Nav() {
 				</div>
 			</div>
 			<div
-				className={`md:hidden relative border-y-2 border-black backdrop-blur-lg backdrop-brightness-25 bg-black/30 ${open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
+				className={`md:hidden relative border-y-2 border-black backdrop-blur-lg backdrop-brightness-25 bg-black/30 ease-out duration-300 ${open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
 					}`}
 			>
 				<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
