@@ -46,12 +46,14 @@ const results: SearchItem[] = [
 	},
 	{
 		id: '3',
+		resturantId: '1',
 		type: 'dish',
 		name: 'Dish 1',
 		allergens: ['gluten', 'nuts']
 	},
 	{
 		id: '4',
+		resturantId: '2',
 		type: 'dish',
 		name: 'Dish 2',
 		allergens: []

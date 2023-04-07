@@ -7,12 +7,11 @@ interface CardProps {
     description: string;
     href?: string;
 }
-
+//FIX: Image is not positioned properly
 const Card = (props: CardProps) => {
     const card = (
         <div className="flex flex-row max-w-sm items-center border-2 border-black hover:border-primary rounded-lg shadow bg-black/70 hover:scale-105">
             <div className="fixed object-cover h-48 w-24 rounded-l-lg">
-                //FIX: Image is not positioned properly
                 <Image width={988} height={658} src={props.image} alt={'Image of restaurant/dish'} />
             </div>
             <div className="flex flex-col justify-between p-4 leading-normal">
