@@ -29,7 +29,7 @@ export default function Nav() {
                     </div>
                 </div>
                 <div className="hidden lg:flex items-center justify-end lg:justify-center">
-                    <Link href="/login" className="font-bold text-lg px-4 p-2 m-2 bg-primary text-black rounded-md hover:bg-primary/70">
+                    <Link href="/login" className="font-bold text-lg px-4 p-2 m-2 bg-primary hover:bg-primary/70 text-black rounded-md">
                         Log In
                     </Link>
                 </div>
@@ -42,7 +42,7 @@ export default function Nav() {
                     </button>
                 </div>
             </div>
-            <div className={`lg:hidden relative ${open ? 'translate-y-0' : 'h-0 -translate-y-[400px]'}`}>
+            <div className={`lg:hidden relative bg-slate/30 backdrop-blur-lg backdrop-brightness-25 ${open ? 'translate-y-0' : 'h-0 -translate-y-[400px]'}`}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {links.map((item) => (
                         <Link key={item.href} href={item.href} className="block px-3 py-2 text-base font-medium hover:text-primary rounded-md">
@@ -52,7 +52,7 @@ export default function Nav() {
                 </div>
                 <div className="px-5 py-4 space-y-4">
                     <div>
-                        <Link href="/login" className="block w-full px-5 py-3 text-base font-bold text-center bg-primary text-black border border-transparent rounded-md shadow-sm">
+                        <Link href="/login" className="block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm">
                             Log In
                         </Link>
                     </div>
