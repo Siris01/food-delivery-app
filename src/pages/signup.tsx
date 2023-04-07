@@ -16,7 +16,6 @@ const Singup: NextPage = () => {
 					<span>Email</span>
 					<Input
 						rightIcon={<IconMail color='black' />}
-						iconBG
 						value={email}
 						setValue={setEmail}
 						type='email'
@@ -27,7 +26,6 @@ const Singup: NextPage = () => {
 					<span>Password</span>
 					<Input
 						rightIcon={<IconLock color='black' />}
-						iconBG
 						value={password}
 						setValue={setPassword}
 						type='password'
