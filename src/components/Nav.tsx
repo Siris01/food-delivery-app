@@ -74,6 +74,7 @@ export default function Nav() {
 					{['Login', 'Sign Up'].map((name) => {
 						return (
 							<Link
+								onClick={() => setOpen(false)}
 								key={name.toLowerCase().replaceAll(' ', '')}
 								href={`/${name.toLowerCase().replaceAll(' ', '')}`}
 								className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'

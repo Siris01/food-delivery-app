@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 						>
 							<Image src={`/icons/${cuisine.icon}.svg`} alt={cuisine.title} width={256} height={256} />
 							<div className='flex flex-col justify-between ml-4'>
-								<span className='font-bold text-lg'>{cuisine.title}</span>
+								<span className='font-bold text-lg text-primary'>{cuisine.title}</span>
 								<span className='font-medium text-base'>{cuisine.description}</span>
 							</div>
 						</Link>
