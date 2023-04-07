@@ -1,14 +1,12 @@
 import type { NextPage } from 'next';
 import Nav from '@components/Nav';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
 	return (
-		<>
+		<div>
 			<Nav />
-			{
-				Array.from(Array(150).keys()).map((i) => <div key={i} className='text-primary'>Hello world!</div>)
-			}
-		</>
+		</div>
 	);
 };
 

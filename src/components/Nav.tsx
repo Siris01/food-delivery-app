@@ -1,80 +1,63 @@
 import Logo from '@components/Logo';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Button, Navbar } from 'flowbite-react';
+import { useState } from 'react';
 
-const data = [
-    {
-        icon: 'curry-rice',
-        title: 'Indian',
-        description: 'With its complex spice blends and diverse array of vegetarian and non-vegetarian dishes, this cuisine offers a wealth of bold, flavorful options.',
-    },
-    {
-        icon: 'pizza',
-        title: 'Italian',
-        description: 'This cuisine is known for its comforting, hearty dishes that often feature fresh tomatoes, aromatic herbs, and creamy cheeses.',
-    },
-    {
-        icon: 'taco',
-        title: 'Mexican',
-        description: 'With its complex spice blends and diverse array of vegetarian and non-vegetarian dishes, this cuisine offers a wealth of bold, flavorful options.',
-    },
-    {
-        icon: 'steaming-bowl',
-        title: 'Chinese',
-        description: 'With a focus on balance and harmony, this cuisine blends sweet, sour, salty, and umami flavors to create dishes that are both satisfying and nuanced.'
-    },
-    {
-        icon: 'hamburger',
-        title: 'American',
-        description: 'From classNameic burgers and fries to regional specialties like barbecue and seafood, this cuisine is diverse and varied, with a focus on hearty, comforting fare.'
-    },
-    {
-        icon: 'croissant',
-        title: 'French',
-        description: 'Known for its rich, buttery flavors and decadent desserts, this cuisine features a wide range of savory dishes that highlight the beauty of simple ingredients cooked to perfection.'
-    }
-];
+const links = [
+    { title: 'Home', href: '/' },
+    { title: 'Order', href: '/order' },
+    { title: 'Cart', href: '/cart' },
+    { title: 'Account', href: '/account' },
+]
 
 export default function Nav() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <Navbar
-            fluid={true}
-            rounded={true}
-            className='!bg-bg text-white'
-        >
-            <Navbar.Brand href="/">
-                <Logo size={48} />
-                <span className="self-center whitespace-nowrap text-xl font-semibold">
-                    Flowbite
-                </span>
-            </Navbar.Brand>
-            <div className="flex md:order-2">
-                <Link href='/login' className='bg-primary px-4 py-2 m-2 rounded-md font-bold text-lg'>
-                    Log In
-                </Link>
-                <Navbar.Toggle />
+        <nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/30 before:border-black'>
+            <div className="relative text-white flex items-center justify-between px-4 py-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div className="flex items-center flex-1">
+                    <div className="flex items-center justify-center">
+                        <Logo size={48} />
+                        <span className='ml-4 font-bold text-lg'>FDA</span>
+                    </div>
+                    <div className="hidden ml-10 space-x-8 lg:block">
+                        {links.map((item) => (
+                            <Link key={item.href} href={item.href} className="text-lg font-medium hover:text-primary">
+                                {item.title}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+                <div className="flex items-center justify-end   lg:justify-center">
+                    <Link href="/login" className="hidden lg:block text-slate font-bold text-lg px-4 p-2 m-2 bg-primary rounded-md hover:bg-primary/70">
+                        Log In
+                    </Link>
+                </div>
+                <div className="-mr-2 -my-2 lg:hidden">
+                    <button onClick={() => setIsOpen(o => !o)} type="button" className="inline-flex items-center justify-center p-2 bg-primary text-slate rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                        <span className="sr-only">Open main menu</span>
+                        <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <Navbar.Collapse>
-                <Navbar.Link
-                    href="/"
-                    active={true}
-                >
-                    Home
-                </Navbar.Link>
-                <Navbar.Link href="/navbars">
-                    About
-                </Navbar.Link>
-                <Navbar.Link href="/navbars">
-                    Services
-                </Navbar.Link>
-                <Navbar.Link href="/navbars">
-                    Pricing
-                </Navbar.Link>
-                <Navbar.Link href="/navbars">
-                    Contact
-                </Navbar.Link>
-            </Navbar.Collapse>
-        </Navbar>
+            {isOpen ? (<div className="lg:hidden relative">
+                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    {links.map((item) => (
+                        <Link key={item.href} href={item.href} className="block px-3 py-2 text-base font-medium hover:text-primary rounded-md">
+                            {item.title}
+                        </Link>
+                    ))}
+                </div>
+                <div className="px-5 py-4 space-y-4">
+                    <div>
+                        <Link href="/login" className="block w-full px-5 py-3 text-base font-bold text-center bg-primary text-slate border border-transparent rounded-md shadow-sm">
+                            Log In
+                        </Link>
+                    </div>
+                </div>
+            </div>) : null}
+        </nav>
     )
 }

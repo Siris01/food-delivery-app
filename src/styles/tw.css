@@ -2,24 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--primary: #36AC4E;
-	--bg: #121212;
-}
+@layer base {
+	:root {
+		--primary: #36AC4E;
+		--bg: #121212;
+	}
 
-body {
-	font-smooth: auto;
-	overflow-x: hidden;
-	scroll-behavior: smooth;
-	scrollbar-width: auto;
-}
+	* {
+		@apply transition-all delay-100 ease-in-out;
+	}
 
-.shadow-bottom {
-	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.38);
-}
+	body {
+		font-smooth: auto;
+		overflow-x: hidden;
+		scroll-behavior: smooth;
+		scrollbar-width: auto;
+	}
 
-.shadow-top {
-	box-shadow: 0px -8px 8px rgba(0, 0, 0, 0.38);
 }
 
 ::-webkit-scrollbar {
