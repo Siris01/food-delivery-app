@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
-import { Button } from '@mantine/core';
 import Nav from '@components/Nav';
 
 const Home: NextPage = () => {
 	return (
 		<>
 			<Nav />
-			<Button>Click me!</Button>
+			{
+				Array.from(Array(150).keys()).map((i) => <div key={i} className='text-primary'>Hello world!</div>)
+			}
 		</>
 	);
 };

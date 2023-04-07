@@ -3,19 +3,15 @@
 @tailwind utilities;
 
 :root {
-	--primary: #2b8a3e;
-	--slate: #11111b;
+	--primary: #36AC4E;
+	--bg: #121212;
 }
 
 body {
 	font-smooth: auto;
-
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-
 	scrollbar-width: auto;
-
-	background-color: var(--slate);
 }
 
 .shadow-bottom {
