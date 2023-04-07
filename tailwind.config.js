@@ -8,7 +8,7 @@ module.exports = {
 		extend: {
 			colors: {
 				slate: '#121212',
-				primary: '#36AC4E'
+				primary: '#FE5001'
 			}
 		}
 	}
