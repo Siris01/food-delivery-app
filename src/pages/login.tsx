@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { theme } from '@utils/config';
 
 const Login: NextPage = () => {
 	const [email, setEmail] = useState<string>('');
@@ -33,9 +34,9 @@ const Login: NextPage = () => {
 						placeholder='myname123'
 					/>
 				</div>
-				<button className='flex flex-row p-4 bg-primary hover:bg-primary/70 text-black rounded-md justify-center w-full'>
+				<button className='flex flex-row p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'>
 					<span className='font-bold'>Login</span>
-					<IconArrowRight color='black' />
+					<IconArrowRight className='ml-2 font-bold' color={theme} />
 				</button>
 				<Link className='text-primary font-medium hover:underline text-center' href='/signup'>
 					Don&apos;t have an account? Sign Up here

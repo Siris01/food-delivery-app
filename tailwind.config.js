@@ -8,7 +8,8 @@ module.exports = {
 		extend: {
 			colors: {
 				slate: '#121212',
-				primary: '#FE5001'
+				primary: '#FE5001',
+				dualtone: '#5B1D00'
 			},
 			animation: {
 				text: 'text 3s ease infinite'

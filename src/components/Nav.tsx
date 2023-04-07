@@ -30,24 +30,26 @@ export default function Nav() {
 					</div>
 				</div>
 				<div className='hidden mr-2 md:flex items-center justify-end md:justify-center'>
-					<Link
-						href='/login'
-						className='font-bold text-lg px-4 p-2 m-2 border-2 border-primary bg-black hover:bg-primary text-white rounded-md'
-					>
-						Login
-					</Link>
-					<Link
-						href='/signup'
-						className='font-bold text-lg px-4 p-2 m-2 bg-primary hover:bg-primary/70 text-black rounded-md'
-					>
-						Sign Up
-					</Link>
+					{
+						['Login', 'Sign Up'].map((name) => {
+							const href = name.toLowerCase().replaceAll(' ', '');
+							return (
+								<Link
+									key={href}
+									href={`/${href}`}
+									className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
+								>
+									{name}
+								</Link>
+							)
+						})
+					}
 				</div>
 				<div className='mr-2 md:hidden'>
 					<button
 						onClick={() => setOpen((o) => !o)}
 						type='button'
-						className='inline-flex items-center justify-center bg-primary text-black rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary'
+						className='inline-flex items-center justify-center bg-dualtone hover:bg-dualtone/70 text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary'
 					>
 						<span className='sr-only'>Open main menu</span>
 						<Hamburger rounded toggled={open} size={24} />
@@ -72,12 +74,13 @@ export default function Nav() {
 				</div>
 				<div className='px-5 py-4 space-y-4'>
 					{['Login', 'Sign Up'].map((name) => {
+						const href = name.toLowerCase().replaceAll(' ', '');
 						return (
 							<Link
 								onClick={() => setOpen(false)}
-								key={name.toLowerCase().replaceAll(' ', '')}
-								href={`/${name.toLowerCase().replaceAll(' ', '')}`}
-								className='block w-full px-5 py-3 text-base font-bold text-center bg-primary hover:bg-primary/70 text-black border border-transparent rounded-md shadow-sm'
+								key={href}
+								href={`/${href}`}
+								className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-md shadow-sm'
 							>
 								{name}
 							</Link>
@@ -85,6 +88,6 @@ export default function Nav() {
 					})}
 				</div>
 			</div>
-		</nav>
+		</nav >
 	);
 }
