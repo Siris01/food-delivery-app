@@ -16,10 +16,10 @@ export default function Nav() {
         <nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/30 before:border-black'>
             <div className="relative text-white flex items-center justify-between px-4 py-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="flex items-center flex-1">
-                    <div className="flex items-center justify-center">
+                    <Link href='/' className="flex items-center justify-center">
                         <Logo size={48} />
                         <span className='ml-4 font-bold text-lg'>FDA</span>
-                    </div>
+                    </Link>
                     <div className="hidden ml-10 space-x-8 lg:block">
                         {links.map((item) => (
                             <Link key={item.href} href={item.href} className="text-lg font-medium hover:text-primary">
@@ -28,21 +28,21 @@ export default function Nav() {
                         ))}
                     </div>
                 </div>
-                <div className="flex items-center justify-end   lg:justify-center">
-                    <Link href="/login" className="hidden lg:block font-bold text-lg px-4 p-2 m-2 bg-primary text-black rounded-md hover:bg-primary/70">
+                <div className="hidden lg:flex items-center justify-end lg:justify-center">
+                    <Link href="/login" className="font-bold text-lg px-4 p-2 m-2 bg-primary text-black rounded-md hover:bg-primary/70">
                         Log In
                     </Link>
                 </div>
-                <button onClick={() => console.log("a")} type="button" className="z-[100] -mr-2 -my-2 lg:hidden">
-                    <div className="inline-flex items-center justify-center p-2 bg-primary text-black rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                <div className="-mr-2 -my-2 lg:hidden">
+                    <button onClick={() => setOpen(o => !o)} type='button' className="inline-flex items-center justify-center p-2 bg-primary text-black rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                    </div>
-                </button>
+                    </button>
+                </div>
             </div>
-            {open ? (<div className="lg:hidden relative">
+            <div className={`lg:hidden relative ${open ? 'translate-y-0' : 'h-0 -translate-y-[400px]'}`}>
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {links.map((item) => (
                         <Link key={item.href} href={item.href} className="block px-3 py-2 text-base font-medium hover:text-primary rounded-md">
@@ -57,7 +57,7 @@ export default function Nav() {
                         </Link>
                     </div>
                 </div>
-            </div>) : null}
+            </div>
         </nav>
     )
 }

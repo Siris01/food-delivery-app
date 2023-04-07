@@ -1,3 +1,4 @@
+import Nav from '@components/Nav';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 

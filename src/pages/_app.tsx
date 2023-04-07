@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { Outfit } from 'next/font/google';
+import Nav from '@components/Nav';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name='description' content='Food delivery app' />
 			</Head>
 			<main className={font.className}>
+				<Nav />
 				<Component {...pageProps} />
 			</main>
 		</>
