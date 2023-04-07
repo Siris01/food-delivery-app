@@ -10,7 +10,7 @@ const Login: NextPage = () => {
 
 	return (
 		<div className='flex items-center justify-center'>
-			<div className='flex flex-col rounded-md bg-black/70 p-4 m-4 space-y-4'>
+			<div className='flex flex-col rounded-md bg-black/70 p-12 space-y-4'>
 				<span className='text-primary font-bold text-2xl text-center'>Login</span>
 				<div className='flex flex-col'>
 					<span>Email</span>

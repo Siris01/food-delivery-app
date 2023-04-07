@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			</Head>
 			<main className={`${font.className} min-h-screen`}>
 				<Nav />
-				<div className='flex flex-col justify-center' style={{ minHeight: 'calc(100vh - 96px)' }}>
+				<div className='flex flex-col justify-center my-4 md:my-2 lg:my-0' style={{ minHeight: 'calc(100vh - 96px)' }}>
 					<Component {...pageProps} />
 				</div>
 			</main>
