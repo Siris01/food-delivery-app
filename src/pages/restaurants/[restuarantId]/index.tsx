@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 
 const Restaurant: NextPage = () => {
-    return <></>;
+	return <></>;
 };
 
 export default Restaurant;
