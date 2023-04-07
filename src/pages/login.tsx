@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
 import Input from '@components/Input';
 import { useState } from 'react';
-import { IconMail, IconLock, IconArrowRight } from '@tabler/icons-react';
+import { IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Login: NextPage = () => {
 	const [email, setEmail] = useState<string>('');
@@ -15,7 +16,7 @@ const Login: NextPage = () => {
 				<div className='flex flex-col'>
 					<span>Email</span>
 					<Input
-						rightIcon={<IconMail color='black' />}
+						rightIcon={<Image src='/icons/email.svg' height={24} width={24} alt='email' />}
 						value={email}
 						setValue={setEmail}
 						type='email'
@@ -25,7 +26,7 @@ const Login: NextPage = () => {
 				<div className='flex flex-col'>
 					<span>Password</span>
 					<Input
-						rightIcon={<IconLock color='black' />}
+						rightIcon={<Image src='/icons/lock.svg' height={24} width={24} alt='lock' />}
 						value={password}
 						setValue={setPassword}
 						type='password'

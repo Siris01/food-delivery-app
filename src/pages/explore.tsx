@@ -1,3 +1,39 @@
+import Input from '@components/Input';
+import { NextPage } from 'next';
+import { useState } from 'react';
+import Image from 'next/image';
+
+//TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
+//TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
+
+const Explore: NextPage = () => {
+	const [search, setSearch] = useState('');
+
+	const SearchButton = //@ts-ignore
+		(
+			<button onClick={(_) => console.log(`Searched for ${search}`)} className='hover:scale-110'>
+				<Image src='/icons/search.svg' alt='search' width={32} height={32} />
+			</button>
+		);
+	return (
+		<div className='flex flex-col justify-around'>
+			<div className='space-y-4'>
+				<span className='font-extrabold text-4xl text-primary'>Explore</span>
+				<Input
+					type='text'
+					fullyRounded
+					rightIcon={SearchButton}
+					value={search}
+					setValue={setSearch}
+					placeholder='Search for restaurants/dishes'
+				/>
+			</div>
+		</div>
+	);
+};
+
+export default Explore;
+
 export const cuisines = [
 	{
 		icon: 'curry',
@@ -36,6 +72,3 @@ export const cuisines = [
 			'Known for its rich, buttery flavors and decadent desserts, this cuisine features a wide range of savory dishes that highlight the beauty of simple ingredients cooked to perfection.'
 	}
 ];
-
-export default function Order() {}
-//TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
