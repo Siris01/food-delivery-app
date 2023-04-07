@@ -10,7 +10,7 @@ const links = [
 ]
 
 export default function Nav() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     return (
         <nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/30 before:border-black'>
@@ -29,20 +29,20 @@ export default function Nav() {
                     </div>
                 </div>
                 <div className="flex items-center justify-end   lg:justify-center">
-                    <Link href="/login" className="hidden lg:block text-slate font-bold text-lg px-4 p-2 m-2 bg-primary rounded-md hover:bg-primary/70">
+                    <Link href="/login" className="hidden lg:block font-bold text-lg px-4 p-2 m-2 bg-primary text-black rounded-md hover:bg-primary/70">
                         Log In
                     </Link>
                 </div>
-                <div className="-mr-2 -my-2 lg:hidden">
-                    <button onClick={() => setIsOpen(o => !o)} type="button" className="inline-flex items-center justify-center p-2 bg-primary text-slate rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
+                <button onClick={() => console.log("a")} type="button" className="z-[100] -mr-2 -my-2 lg:hidden">
+                    <div className="inline-flex items-center justify-center p-2 bg-primary text-black rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
-                    </button>
-                </div>
+                    </div>
+                </button>
             </div>
-            {isOpen ? (<div className="lg:hidden relative">
+            {open ? (<div className="lg:hidden relative">
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     {links.map((item) => (
                         <Link key={item.href} href={item.href} className="block px-3 py-2 text-base font-medium hover:text-primary rounded-md">
@@ -52,7 +52,7 @@ export default function Nav() {
                 </div>
                 <div className="px-5 py-4 space-y-4">
                     <div>
-                        <Link href="/login" className="block w-full px-5 py-3 text-base font-bold text-center bg-primary text-slate border border-transparent rounded-md shadow-sm">
+                        <Link href="/login" className="block w-full px-5 py-3 text-base font-bold text-center bg-primary text-black border border-transparent rounded-md shadow-sm">
                             Log In
                         </Link>
                     </div>
