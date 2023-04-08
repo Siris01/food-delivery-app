@@ -20,9 +20,11 @@ const Explore: NextPage = () => {
 		);
 
 	useEffect(() => {
+		/*
 		fetch(`/api/search?q=${search}`)
 			.then((res) => res.json())
 			.then((data) => setDate(data.results));
+		*/
 	}, []);
 
 	return (
