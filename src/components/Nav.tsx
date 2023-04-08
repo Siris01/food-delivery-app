@@ -30,20 +30,18 @@ export default function Nav() {
 					</div>
 				</div>
 				<div className='hidden mr-2 md:flex items-center justify-end md:justify-center'>
-					{
-						['Login', 'Sign Up'].map((name) => {
-							const href = name.toLowerCase().replaceAll(' ', '');
-							return (
-								<Link
-									key={href}
-									href={`/${href}`}
-									className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
-								>
-									{name}
-								</Link>
-							)
-						})
-					}
+					{['Login', 'Sign Up'].map((name) => {
+						const href = name.toLowerCase().replaceAll(' ', '');
+						return (
+							<Link
+								key={href}
+								href={`/${href}`}
+								className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
+							>
+								{name}
+							</Link>
+						);
+					})}
 				</div>
 				<div className='mr-2 md:hidden'>
 					<button
@@ -57,8 +55,9 @@ export default function Nav() {
 				</div>
 			</div>
 			<div
-				className={`md:hidden relative border-y-2 border-black backdrop-blur-lg backdrop-brightness-25 bg-black/30 ease-out duration-300 ${open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
-					}`}
+				className={`md:hidden relative border-y-2 border-black backdrop-blur-lg backdrop-brightness-25 bg-black/30 ease-out duration-300 ${
+					open ? 'translate-y-0' : 'h-0 -translate-y-[500px]'
+				}`}
 			>
 				<div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
 					{links.map((item) => (
@@ -88,6 +87,6 @@ export default function Nav() {
 					})}
 				</div>
 			</div>
-		</nav >
+		</nav>
 	);
 }

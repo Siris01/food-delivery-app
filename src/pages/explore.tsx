@@ -1,13 +1,16 @@
 import Input from '@components/Input';
 import { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import type { SearchItem } from '@api/search';
+import Card, { LoadingCard } from '@components/Card';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
 //TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
 
 const Explore: NextPage = () => {
 	const [search, setSearch] = useState('');
+	const [data, setDate] = useState<SearchItem[] | null>(null);
 
 	const SearchButton = //@ts-ignore
 		(
@@ -15,9 +18,16 @@ const Explore: NextPage = () => {
 				<Image src='/icons/search.svg' alt='search' width={32} height={32} />
 			</button>
 		);
+
+	useEffect(() => {
+		fetch(`/api/search?q=${search}`)
+			.then((res) => res.json())
+			.then((data) => setDate(data.results));
+	}, []);
+
 	return (
-		<div className='flex flex-col justify-around'>
-			<div className='space-y-4'>
+		<div className='flex flex-col items-center justify-center m-4'>
+			<div className='flex flex-col space-y-4 items-center'>
 				<span className='font-extrabold text-4xl text-primary'>Explore</span>
 				<Input
 					type='text'
@@ -27,6 +37,39 @@ const Explore: NextPage = () => {
 					setValue={setSearch}
 					placeholder='Search for restaurants/dishes'
 				/>
+			</div>
+			<div className='mt-8 sapce-y-4 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+				{data && data.length ? (
+					data.map((d) => {
+						if (d.type === 'restaurant')
+							return (
+								<Card
+									key={d.id}
+									title={d.name}
+									image={d.image}
+									href={`/restaurants/${d.id}`}
+									text={d.about}
+									subText={`${d.distance}KM away`}
+								/>
+							);
+						else if (d.type === 'dish')
+							return (
+								<Card
+									key={d.id}
+									title={d.name}
+									image={d.image}
+									href={`/restaurants/${d.resturantId}/dishes/${d.id}`}
+									text={d.allergens.length ? `Allergens - ${d.allergens.join(', ')}` : 'No allergies!'}
+									subText={`${d.price} ₹`}
+								/>
+							);
+						else return null;
+					})
+				) : data ? (
+					<span className='font-2xl text-primary font-bold'>No results found :(</span>
+				) : (
+					Array.from(Array(18).keys()).map((i) => <LoadingCard key={i} />)
+				)}
 			</div>
 		</div>
 	);
