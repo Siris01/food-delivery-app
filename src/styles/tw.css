@@ -18,6 +18,10 @@
 		scroll-behavior: smooth;
 		scrollbar-width: auto;
 	}
+
+	button:hover {
+		@apply -translate-y-1;
+	}
 }
 
 ::-webkit-scrollbar {

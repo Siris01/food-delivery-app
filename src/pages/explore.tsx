@@ -10,7 +10,7 @@ import Card, { LoadingCard } from '@components/Card';
 
 const Explore: NextPage = () => {
 	const [search, setSearch] = useState('');
-	const [data, setDate] = useState<SearchItem[] | null>(null);
+	const [data, setData] = useState<SearchItem[] | null>(null);
 
 	const SearchButton = //@ts-ignore
 		(
@@ -23,7 +23,7 @@ const Explore: NextPage = () => {
 		/*
 		fetch(`/api/search?q=${search}`)
 			.then((res) => res.json())
-			.then((data) => setDate(data.results));
+			.then((data) => setData(data.results));
 		*/
 	}, []);
 
@@ -61,7 +61,7 @@ const Explore: NextPage = () => {
 									title={d.name}
 									image={d.image}
 									href={`/restaurants/${d.resturantId}/dishes/${d.id}`}
-									text={d.allergens.length ? `Allergens - ${d.allergens.join(', ')}` : 'No allergies!'}
+									text={d.allergens.length ? `Allergens - ${d.allergens.join(', ')}` : 'No allergens!'}
 									subText={`${d.price} ₹`}
 								/>
 							);
