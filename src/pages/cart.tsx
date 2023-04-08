@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Card, { LoadingCard } from '@components/Card';
 import type { DishItem } from '@api/search';
 
-type CartItem = DishItem & {
+export type CartItem = DishItem & {
 	quantity: number;
 };
 
@@ -52,6 +52,7 @@ const CartItemCard = (props: CardItemCardProps) => {
 	return (
 		<div className='relative'>
 			<Card
+				disableHoverEffects
 				title={props.name}
 				image={props.image}
 				subText={`Price: ${props.price * props.quantity}, Qty: ${props.quantity}`}

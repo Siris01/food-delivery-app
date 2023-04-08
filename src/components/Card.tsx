@@ -7,11 +7,12 @@ interface CardProps {
 	subText: string;
 	text: string;
 	href?: string;
+	disableHoverEffects?: boolean;
 }
 
 const Card = (props: CardProps) => {
 	const card = (
-		<div className='flex flex-row p-2 m-2 min-w-[24rem] max-w-[24rem] shadow-xl shadow-zinc-900 items-center border-2 border-black hover:border-primary rounded-lg bg-black/70 hover:scale-105'>
+		<div className={`flex flex-row p-2 m-2 min-w-[24rem] max-w-[24rem] shadow-xl shadow-zinc-900 items-center border-2 border-black rounded-lg bg-black/70 ${!props.disableHoverEffects && 'hover:border-primary hover:scale-105'}`}>
 			<div className='relative min-h-[12rem] min-w-[6rem]'>
 				<Image fill src={props.image} alt={'Image of restaurant/dish'} className='object-cover rounded-lg' />
 			</div>
