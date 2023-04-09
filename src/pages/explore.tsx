@@ -14,9 +14,9 @@ const Explore: NextPage = () => {
 
 	const SearchButton = //@ts-ignore
 		(
-			<button onClick={(_) => console.log(`Searched for ${search}`)} className='hover:scale-110'>
+			<div id='submit' onClick={(_) => console.log(`Searched for ${search}`)} className='cursor-pointer hover:scale-110'>
 				<Image src='/icons/search.svg' alt='search' width={32} height={32} />
-			</button>
+			</div>
 		);
 
 	useEffect(() => {

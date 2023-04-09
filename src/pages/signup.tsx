@@ -34,7 +34,7 @@ const Singup: NextPage = () => {
 						placeholder='myname123'
 					/>
 				</div>
-				<button className='flex flex-row p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'>
+				<button id='submit' className='flex flex-row p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'>
 					<span className='font-bold'>Sign Up</span>
 					<IconArrowRight className='ml-2 font-bold' color={theme} />
 				</button>
