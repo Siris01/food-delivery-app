@@ -20,8 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
 				<title>FDA</title>
 				<meta property='og:title' content='FDA' />
 				<meta property='og:description' content='Food delivery app' />
-				<meta property='theme-color' content='#2B8A3E' />
-				<meta name='theme-color' content='#2B8A3E' />
+				<meta property='theme-color' content='#FE5001' />
+				<meta name='theme-color' content='#FE5001' />
 				<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 				<meta name='description' content='Food delivery app' />
 			</Head>
