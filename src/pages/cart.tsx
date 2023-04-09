@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import Card, { LoadingCard } from '@components/Card';
+import Card from '@components/Card';
 import { DishItem, results } from '@api/search';
+import Link from 'next/link';
 
-export type CartItem = DishItem & {
+export type CartItem = Omit<DishItem, 'type'> & {
 	quantity: number;
 };
 
@@ -30,18 +31,21 @@ const Cart: NextPage = () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center m-4'>
-			<div className='flex flex-col space-y-4 items-center'>
+			<div className='flex flex-col items-center'>
 				<span className='font-extrabold text-4xl text-primary'>My Cart</span>
 			</div>
-			<div className='mt-8 sapce-y-4 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+			<div className='mt-8 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 				{data && data.length ? (
 					data.map((d) => <CartItemCard key={d.id} setData={setData} {...d} />)
 				) : data ? (
 					<span className='font-2xl text-primary font-bold'>Cart is empty</span>
 				) : (
-					Array.from(Array(18).keys()).map((i) => <LoadingCard key={i} />)
+					<></>
 				)}
 			</div>
+			<Link className='mt-4 text-primary font-medium text-xl hover:underline text-center' href='/checkout'>
+				Ready to checkout?
+			</Link>
 		</div>
 	);
 };

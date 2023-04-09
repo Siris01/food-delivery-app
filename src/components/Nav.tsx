@@ -79,7 +79,7 @@ export default function Nav() {
 								onClick={() => setOpen(false)}
 								key={href}
 								href={`/${href}`}
-								className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-md shadow-sm'
+								className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-md shadow'
 							>
 								{name}
 							</Link>

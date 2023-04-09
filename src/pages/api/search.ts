@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { cuisines } from '../explore';
+import { cuisines } from '@pages/explore';
 
 export interface RestaurantItem {
 	id: string;
@@ -13,7 +13,7 @@ export interface RestaurantItem {
 export interface DishItem {
 	id: string;
 	image: string;
-	resturantId: string;
+	restaurantId: string;
 	type: 'dish';
 	name: string;
 	allergens: string[];
@@ -54,7 +54,7 @@ export const results: SearchItem[] = [
 	},
 	{
 		id: '3',
-		resturantId: '1',
+		restaurantId: '1',
 		image: 'https://cdn.pixabay.com/photo/2017/10/15/11/41/sushi-2853382__340.jpg',
 		type: 'dish',
 		name: 'Dish 1',
@@ -63,7 +63,7 @@ export const results: SearchItem[] = [
 	},
 	{
 		id: '4',
-		resturantId: '2',
+		restaurantId: '2',
 		image: 'https://cdn.pixabay.com/photo/2016/03/05/19/02/abstract-1238247__340.jpg',
 		type: 'dish',
 		name: 'Dish 2',

@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 						<Link
 							href={`/explore?cuisine=${cuisine.title.toLowerCase()}`}
 							key={cuisine.title.toLowerCase()}
-							className='flex flex-row justify-center items-center p-4 m-4 shadow-xl shadow-zinc-900 bg-black/70 rounded-md cursor-pointer border-2 border-black hover:border-primary hover:scale-105'
+							className='flex flex-row justify-center items-center p-4 m-4 shadow bg-black/70 rounded-md cursor-pointer border-2 border-black hover:border-primary hover:scale-105'
 						>
 							<Image src={`/icons/${cuisine.icon}.svg`} alt={cuisine.title} width={256} height={256} />
 							<div className='flex flex-col justify-between ml-4'>

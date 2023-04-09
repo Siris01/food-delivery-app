@@ -13,7 +13,7 @@ interface CardProps {
 const Card = (props: CardProps) => {
 	const card = (
 		<div
-			className={`flex flex-row p-2 m-2 min-w-[24rem] max-w-[24rem] shadow-xl shadow-zinc-900 items-center border-2 border-black rounded-lg bg-black/70 ${
+			className={`inline-flex flex-row items-center p-2 m-2 min-w-[24rem] max-w-[24rem] shadow border-2 border-black rounded-lg bg-black/70 ${
 				!props.disableHoverEffects && 'hover:border-primary hover:scale-105'
 			}`}
 		>
@@ -25,7 +25,7 @@ const Card = (props: CardProps) => {
 					<h5 className='text-2xl font-bold tracking-tight text-primary'>{props.title}</h5>
 					<span className='text-sm text-white/90'>{props.subText}</span>
 				</div>
-				<p className='mb-3 font-normal text-wihte/90'>{props.text}</p>
+				<p className='mb-3 font-normal text-white/90'>{props.text}</p>
 			</div>
 		</div>
 	);

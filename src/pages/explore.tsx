@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { SearchItem, results } from '@api/search';
-import Card, { LoadingCard } from '@components/Card';
+import Card from '@components/Card';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
 //TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
@@ -45,7 +45,7 @@ const Explore: NextPage = () => {
 					placeholder='Search for restaurants/dishes'
 				/>
 			</div>
-			<div className='mt-8 sapce-y-4 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+			<div className='mt-8 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 				{data && data.length ? (
 					data.map((d) => {
 						if (d.type === 'restaurant')
@@ -65,7 +65,7 @@ const Explore: NextPage = () => {
 									key={d.id}
 									title={d.name}
 									image={d.image}
-									href={`/restaurants/${d.resturantId}/dishes/${d.id}`}
+									href={`/restaurants/${d.restaurantId}/dishes/${d.id}`}
 									text={d.allergens.length ? `Allergens - ${d.allergens.join(', ')}` : 'No allergens!'}
 									subText={`${d.price} ₹`}
 								/>
@@ -75,7 +75,7 @@ const Explore: NextPage = () => {
 				) : data ? (
 					<span className='font-2xl text-primary font-bold'>No results found :(</span>
 				) : (
-					Array.from(Array(18).keys()).map((i) => <LoadingCard key={i} />)
+					<></>
 				)}
 			</div>
 		</div>

@@ -12,7 +12,7 @@ const Login: NextPage = () => {
 
 	return (
 		<div className='flex items-center justify-center'>
-			<div className='flex flex-col rounded-md bg-black/70 p-12 space-y-4'>
+			<div className='flex flex-col rounded-md bg-black/70 p-12 space-y-6'>
 				<span className='text-primary font-bold text-2xl text-center'>Login</span>
 				<div className='flex flex-col'>
 					<span>Email</span>
@@ -34,16 +34,18 @@ const Login: NextPage = () => {
 						placeholder='myname123'
 					/>
 				</div>
-				<button
-					id='submit'
-					className='flex flex-row p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'
-				>
-					<span className='font-bold'>Login</span>
-					<IconArrowRight className='ml-2 font-bold' color={theme} />
-				</button>
-				<Link className='text-primary font-medium hover:underline text-center' href='/signup'>
-					Don&apos;t have an account? Sign Up here
-				</Link>
+				<div className='flex flex-col items-center space-y-2'>
+					<button
+						id='submit'
+						className='flex flex-row !mt-6 p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'
+					>
+						<span className='font-bold'>Login</span>
+						<IconArrowRight className='ml-2 font-bold' color={theme} />
+					</button>
+					<Link className='text-primary font-medium hover:underline text-center' href='/signup'>
+						Don&apos;t have an account? Sign Up here
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
