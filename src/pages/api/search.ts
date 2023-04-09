@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 //TODO: Search for the query in the database
 
 // Mock data
-const results: SearchItem[] = [
+export const results: SearchItem[] = [
 	{
 		id: '1',
 		type: 'restaurant',

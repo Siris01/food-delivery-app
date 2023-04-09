@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Card, { LoadingCard } from '@components/Card';
-import type { DishItem } from '@api/search';
+import { DishItem, results } from '@api/search';
 
 export type CartItem = DishItem & {
 	quantity: number;
@@ -13,7 +13,7 @@ const Cart: NextPage = () => {
 	useEffect(() => {
 		/*
 		//TODO: Get cart items here, below is just for demo
-		*/
+		
 
 		fetch('/api/search?q=abc')
 			.then((res) => res.json())
@@ -22,6 +22,10 @@ const Cart: NextPage = () => {
 
 				setData(dishes.map((d: any) => ({ ...d, quantity: 1 })));
 			});
+		*/
+
+		const dishes = results.filter((r: any) => r.type === 'dish');
+		setData(dishes.map((d: any) => ({ ...d, quantity: 1 })));
 	}, []);
 
 	return (

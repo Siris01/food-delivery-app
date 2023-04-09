@@ -2,7 +2,7 @@ import Input from '@components/Input';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import type { SearchItem } from '@api/search';
+import { SearchItem, results } from '@api/search';
 import Card, { LoadingCard } from '@components/Card';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
@@ -14,7 +14,11 @@ const Explore: NextPage = () => {
 
 	const SearchButton = //@ts-ignore
 		(
-			<div id='submit' onClick={(_) => console.log(`Searched for ${search}`)} className='cursor-pointer hover:scale-110'>
+			<div
+				id='submit'
+				onClick={(_) => console.log(`Searched for ${search}`)}
+				className='cursor-pointer hover:scale-110'
+			>
 				<Image src='/icons/search.svg' alt='search' width={32} height={32} />
 			</div>
 		);
@@ -25,6 +29,7 @@ const Explore: NextPage = () => {
 			.then((res) => res.json())
 			.then((data) => setData(data.results));
 		*/
+		setData(results);
 	}, []);
 
 	return (

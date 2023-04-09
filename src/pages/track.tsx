@@ -3,7 +3,7 @@ import { LoadingCard } from '@components/Card';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 
-const Profile: NextPage = () => {
+const Track: NextPage = () => {
 	const [data, setData] = useState<Order[] | null>(null);
 
 	useEffect(() => {
@@ -30,5 +30,5 @@ const Profile: NextPage = () => {
 	);
 };
 
-export default Profile;
+export default Track;
 //TODO: Display orders in line 22
