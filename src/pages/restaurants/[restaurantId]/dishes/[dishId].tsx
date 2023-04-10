@@ -2,7 +2,6 @@ import { results, RestaurantItem, DishItem } from '@api/search';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Card from '@components/Card';
 import { useRouter } from 'next/router';
 
 export type Dish = Omit<DishItem, 'type'>;
@@ -32,9 +31,8 @@ const Dish: NextPage = () => {
 						/>
 					</div>
 					<h1 className='text-primary font-bold text-4xl'>{data.name}</h1>
-					<span className='font-lg font-medium'>{`Allergens: ${
-						data.allergens.length ? data.allergens.join(', ') : 'None'
-					}`}</span>
+					<span className='font-lg font-medium'>{`Allergens: ${data.allergens.length ? data.allergens.join(', ') : 'None'
+						}`}</span>
 					<span className='font-md font-medium'>{`Price: ${data.price} ₹`}</span>
 				</div>
 			)}
