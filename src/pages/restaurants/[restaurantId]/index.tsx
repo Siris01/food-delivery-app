@@ -26,7 +26,7 @@ const Restaurant: NextPage = () => {
 
 	return (
 		<>
-			{data && (
+			{data && cart && (
 				<div className='flex flex-col'>
 					<div className='relative mb-8 min-w-full max-w-full min-h-[40vh] max-h-[40vh]'>
 						<Image

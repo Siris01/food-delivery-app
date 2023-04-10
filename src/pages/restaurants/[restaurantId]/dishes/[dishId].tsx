@@ -2,7 +2,6 @@ import { results, RestaurantItem, DishItem } from '@api/search';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Card from '@components/Card';
 import { useRouter } from 'next/router';
 
 export type Dish = Omit<DishItem, 'type'>;
