@@ -31,8 +31,9 @@ const Dish: NextPage = () => {
 						/>
 					</div>
 					<h1 className='text-primary font-bold text-4xl'>{data.name}</h1>
-					<span className='font-lg font-medium'>{`Allergens: ${data.allergens.length ? data.allergens.join(', ') : 'None'
-						}`}</span>
+					<span className='font-lg font-medium'>{`Allergens: ${
+						data.allergens.length ? data.allergens.join(', ') : 'None'
+					}`}</span>
 					<span className='font-md font-medium'>{`Price: ${data.price} ₹`}</span>
 				</div>
 			)}
