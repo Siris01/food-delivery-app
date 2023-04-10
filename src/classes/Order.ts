@@ -15,7 +15,7 @@ class Order extends Cart {
 		super(dataMembers);
 
 		this.deliveryAddress = deliveryAddress;
-		this.id = randomBytes(64).toString('hex');
+		this.id = randomBytes(16).toString('hex');
 		this.createdAt = new Date(Date.now());
 	}
 
