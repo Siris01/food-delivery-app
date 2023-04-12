@@ -39,3 +39,4 @@ package-lock.json
 src/styles/globals.css
 
 src/pages/test.tsx
+prisma/sqlite.db
