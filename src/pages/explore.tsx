@@ -2,7 +2,7 @@ import Input from '@components/Input';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { SearchItem, results } from '@api/search';
+import { SearchItem } from '@api/search';
 import Card from '@components/Card';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
@@ -24,13 +24,10 @@ const Explore: NextPage = () => {
 		);
 
 	useEffect(() => {
-		/*
 		fetch(`/api/search?q=${search}`)
 			.then((res) => res.json())
 			.then((data) => setData(data.results));
-		*/
-		setData(results);
-	}, []);
+	}, [search]);
 
 	return (
 		<div className='flex flex-col items-center justify-center m-4'>

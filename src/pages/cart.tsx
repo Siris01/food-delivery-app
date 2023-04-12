@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Card from '@components/Card';
-import { DishItem, results } from '@api/search';
+import { DishItem } from '@api/search';
 import Link from 'next/link';
 
 export type CartItem = Omit<DishItem, 'type'> & {
@@ -12,21 +12,8 @@ const Cart: NextPage = () => {
 	const [data, setData] = useState<CartItem[] | null>(null);
 
 	useEffect(() => {
-		/*
-		//TODO: Get cart items here, below is just for demo
-		
-
-		fetch('/api/search?q=abc')
-			.then((res) => res.json())
-			.then((data) => {
-				const dishes = data.results.filter((r: any) => r.type === 'dish');
-
-				setData(dishes.map((d: any) => ({ ...d, quantity: 1 })));
-			});
-		*/
-
-		const dishes = results.filter((r: any) => r.type === 'dish');
-		setData(dishes.map((d: any) => ({ ...d, quantity: 1 })));
+		const cartItems = JSON.parse(localStorage.getItem('cart') ?? '[]');
+		setData(cartItems);
 	}, []);
 
 	return (

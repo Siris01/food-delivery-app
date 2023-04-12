@@ -1,4 +1,4 @@
-import { results, RestaurantItem, DishItem } from '@api/search';
+import { RestaurantItem, DishItem } from '@api/search';
 import { NextPage } from 'next';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -17,15 +17,12 @@ const Restaurant: NextPage = () => {
 
 	//TODO: Store distance as w3w? and calc distance before setting data
 	useEffect(() => {
-		const { type: _, ...d } = {
-			...(results.find(
-				(i) => i.type === 'restaurant' && i.id === parseInt((router.query.restaurantId as string) ?? '0')
-			) as RestaurantItem),
-			menu: results.filter(
-				(i) => i.type === 'dish' && i.restaurantId === parseInt((router.query.restaurantId as string) ?? '0')
-			) as DishItem[]
-		};
-		setData(d);
+		const restaurantId = router.query.restaurantId;
+		if (!restaurantId) return;
+
+		fetch(`/api/restaurants/${restaurantId}`)
+			.then((res) => res.json())
+			.then((data) => setData(data));
 	}, [router.query.dishId, router.query.restaurantId]);
 
 	return (

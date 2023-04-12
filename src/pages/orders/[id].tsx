@@ -1,21 +1,19 @@
 import { Order as OrderType } from '@api/orders/index';
-import { results } from '@api/search';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const Order: NextPage = () => {
 	const [data, setData] = useState<OrderType | null>(null);
+	const router = useRouter();
 	useEffect(() => {
-		/*
-		Get order details here
-		*/
+		const id = router.query.id;
+		if (!id) return;
 
-		setData({
-			id: 1234,
-			eta: 45,
-			items: results.filter((r: any) => r.type === 'dish').map((d: any) => ({ ...d, quantity: 1 }))
-		});
-	}, []);
+		fetch(`/api/orders/${id}`)
+			.then((res) => res.json())
+			.then((data) => setData(data));
+	}, [router.query.id]);
 
 	return (
 		<div>

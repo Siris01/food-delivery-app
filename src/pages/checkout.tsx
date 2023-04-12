@@ -1,17 +1,12 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { CartItem } from './cart';
-import { results } from '@api/search';
 
 const Checkout: NextPage = () => {
 	const [data, setData] = useState<CartItem[]>([]);
 	useEffect(() => {
-		/*
-		Get cart items here
-		*/
-
-		const dishes = results.filter((r: any) => r.type === 'dish');
-		setData(dishes.map((d: any) => ({ ...d, quantity: 1 })));
+		const cartItems = JSON.parse(localStorage.getItem('cart') ?? '[]');
+		setData(cartItems);
 	}, []);
 
 	return (

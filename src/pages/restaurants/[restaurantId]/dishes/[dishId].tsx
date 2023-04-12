@@ -1,4 +1,4 @@
-import { results, RestaurantItem, DishItem } from '@api/search';
+import { DishItem } from '@api/search';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -12,14 +12,13 @@ const Dish: NextPage = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		setData(
-			results.find(
-				(i) =>
-					i.type === 'dish' &&
-					i.restaurantId === parseInt((router.query.restaurantId as string) ?? '0') &&
-					i.id === parseInt((router.query.dishId as string) ?? '0')
-			) as DishItem
-		);
+		const restaurantId = router.query.restaurantId;
+		const dishId = router.query.dishId;
+		if (!restaurantId || !dishId) return;
+
+		fetch(`/api/restaurants/${restaurantId}/dishes/${dishId}`)
+			.then((res) => res.json())
+			.then((data) => setData(data));
 	}, [router.query.dishId, router.query.restaurantId]);
 
 	return (
