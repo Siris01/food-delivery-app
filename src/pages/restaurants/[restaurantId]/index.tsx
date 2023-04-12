@@ -18,8 +18,12 @@ const Restaurant: NextPage = () => {
 	//TODO: Store distance as w3w? and calc distance before setting data
 	useEffect(() => {
 		const { type: _, ...d } = {
-			...(results.find((i) => i.type === 'restaurant' && i.id === router.query.restaurantId) as RestaurantItem),
-			menu: results.filter((i) => i.type === 'dish' && i.restaurantId === router.query.restaurantId) as DishItem[]
+			...(results.find(
+				(i) => i.type === 'restaurant' && i.id === parseInt((router.query.restaurantId as string) ?? '0')
+			) as RestaurantItem),
+			menu: results.filter(
+				(i) => i.type === 'dish' && i.restaurantId === parseInt((router.query.restaurantId as string) ?? '0')
+			) as DishItem[]
 		};
 		setData(d);
 	}, [router.query.dishId, router.query.restaurantId]);

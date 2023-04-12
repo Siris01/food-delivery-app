@@ -5,12 +5,12 @@ export type CartItem = Dish & {
 };
 
 interface Cart {
-	userId: string;
+	userId: number;
 	items: CartItem[];
 }
 
 class Cart {
-	public userId: string;
+	public userId: number;
 	public items: CartItem[];
 
 	constructor(dataMembers: Cart) {
@@ -24,11 +24,11 @@ class Cart {
 		this.items.push({ ...item, quantity: 1 });
 	}
 
-	public removeItem(itemId: string): void {
+	public removeItem(itemId: number): void {
 		this.items = this.items.filter((item) => item.id !== itemId);
 	}
 
-	public changeQuantity(itemId: string, increment: number): void {
+	public changeQuantity(itemId: number, increment: number): void {
 		const item = this.items.find((item) => item.id === itemId);
 		if (!item) throw new Error(`Item ${itemId} not found`);
 

@@ -1,12 +1,12 @@
 interface User {
-	id: string;
+	id: number;
 	username: string;
 	email: string;
 	password: string;
 }
 
 class User {
-	public id: string;
+	public id: number;
 	public username: string;
 	public email: string;
 	public password: string;
@@ -26,7 +26,7 @@ class User {
 
 	public create(user: Omit<User, 'id'>): User {
 		//TODO: Add to db here and retrive id
-		return new User({ ...user, id: '1' });
+		return new User({ ...user, id: 1 });
 	}
 }
 

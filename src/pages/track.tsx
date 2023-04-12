@@ -12,7 +12,7 @@ const Track: NextPage = () => {
 		*/
 		setData([
 			{
-				id: 'sdfs3dsfdsfw34r2wr',
+				id: 1231234,
 				eta: 45,
 				items: []
 			}
@@ -31,7 +31,7 @@ const Track: NextPage = () => {
 						.map((d) => (
 							<div key={d.id}>
 								<Link href={`/orders/${d.id}`} className='text-primary hover:underline'>
-									{d.id.slice(0, 5)}...
+									{d.id.toString().slice(0, 5)}...
 								</Link>{' '}
 								<span>(Arriving in {d.eta}m)</span>
 							</div>

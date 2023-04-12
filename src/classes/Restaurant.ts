@@ -1,7 +1,7 @@
 import Dish from '@classes/Dish';
 
 interface Restaurant {
-	id: string;
+	id: number;
 	name: string;
 	image: string;
 	about: string;
@@ -10,7 +10,7 @@ interface Restaurant {
 }
 
 class Restaurant {
-	public id: string;
+	public id: number;
 	public name: string;
 	public image: string;
 	public about: string;

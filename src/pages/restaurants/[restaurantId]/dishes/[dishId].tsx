@@ -13,7 +13,10 @@ const Dish: NextPage = () => {
 	useEffect(() => {
 		setData(
 			results.find(
-				(i) => i.type === 'dish' && i.restaurantId === router.query.restaurantId && i.id === router.query.dishId
+				(i) =>
+					i.type === 'dish' &&
+					i.restaurantId === parseInt((router.query.restaurantId as string) ?? '0') &&
+					i.id === parseInt((router.query.dishId as string) ?? '0')
 			) as DishItem
 		);
 	}, [router.query.dishId, router.query.restaurantId]);
