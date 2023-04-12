@@ -2,7 +2,7 @@ import { CartItem } from '@pages/cart';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export interface Order {
-	id: string;
+	id: number;
 	eta: number; // In minutes
 	items: CartItem[];
 }

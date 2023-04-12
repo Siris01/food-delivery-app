@@ -1,6 +1,6 @@
 interface Dish {
-	id: string;
-	restaurantId: string;
+	id: number;
+	restaurantId: number;
 	name: string;
 	image: string;
 	allergens: string[];
@@ -8,8 +8,8 @@ interface Dish {
 }
 
 class Dish {
-	public id: string;
-	public restaurantId: string;
+	public id: number;
+	public restaurantId: number;
 	public name: string;
 	public image: string;
 	public allergens: string[];

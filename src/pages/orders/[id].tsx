@@ -11,7 +11,7 @@ const Order: NextPage = () => {
 		*/
 
 		setData({
-			id: 'sdfs3dsfdsfw34r2wr',
+			id: 1234,
 			eta: 45,
 			items: results.filter((r: any) => r.type === 'dish').map((d: any) => ({ ...d, quantity: 1 }))
 		});

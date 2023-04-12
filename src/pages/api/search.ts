@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { cuisines } from '@pages/explore';
 
 export interface RestaurantItem {
-	id: string;
+	id: number;
 	image: string;
 	type: 'restaurant';
 	about: string;
@@ -11,9 +11,9 @@ export interface RestaurantItem {
 }
 
 export interface DishItem {
-	id: string;
+	id: number;
 	image: string;
-	restaurantId: string;
+	restaurantId: number;
 	type: 'dish';
 	name: string;
 	allergens: string[];
@@ -37,7 +37,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 // Mock data
 export const results: SearchItem[] = [
 	{
-		id: '1',
+		id: 1,
 		type: 'restaurant',
 		image: 'https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg',
 		name: 'Restaurant 1',
@@ -45,7 +45,7 @@ export const results: SearchItem[] = [
 		distance: 1.5
 	},
 	{
-		id: '2',
+		id: 2,
 		type: 'restaurant',
 		image: 'https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784__340.jpg',
 		name: 'Restaurant 2',
@@ -53,8 +53,8 @@ export const results: SearchItem[] = [
 		distance: 2.5
 	},
 	{
-		id: '3',
-		restaurantId: '1',
+		id: 3,
+		restaurantId: 1,
 		image: 'https://cdn.pixabay.com/photo/2017/10/15/11/41/sushi-2853382__340.jpg',
 		type: 'dish',
 		name: 'Dish 1',
@@ -62,8 +62,8 @@ export const results: SearchItem[] = [
 		price: 5
 	},
 	{
-		id: '4',
-		restaurantId: '2',
+		id: 4,
+		restaurantId: 2,
 		image: 'https://cdn.pixabay.com/photo/2016/03/05/19/02/abstract-1238247__340.jpg',
 		type: 'dish',
 		name: 'Dish 2',

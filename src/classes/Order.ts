@@ -1,22 +1,23 @@
 import Cart from '@classes/Cart';
-import { randomBytes } from 'node:crypto';
 
 interface Order extends Cart {
-	id: string;
+	id: number;
 	createdAt: Date;
+	deliveryAddress: string;
 }
 
 class Order extends Cart {
-	public id: string;
+	public id: number;
 	public createdAt: Date;
 	public deliveryAddress: string;
 
-	constructor(dataMembers: Cart, deliveryAddress: string) {
+	constructor(dataMembers: Order) {
 		super(dataMembers);
+		const { id, createdAt, deliveryAddress } = dataMembers;
 
+		this.id = id;
+		this.createdAt = createdAt;
 		this.deliveryAddress = deliveryAddress;
-		this.id = randomBytes(16).toString('hex');
-		this.createdAt = new Date(Date.now());
 	}
 
 	public get eta(): Date {
