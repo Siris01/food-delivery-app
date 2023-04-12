@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		results.push({
 			...dish,
 			type: 'dish',
-			allergens: dish.allergens.split(',')
+			allergens: dish.allergens.split(',').filter((a) => a)
 		});
 	}
 
