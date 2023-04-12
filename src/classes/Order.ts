@@ -1,6 +1,7 @@
-import Cart from '@classes/Cart';
+import Cart, { CartProps } from '@classes/Cart';
+import prisma from '@prisma';
 
-interface Order extends Cart {
+export interface OrderProps extends CartProps {
 	id: number;
 	createdAt: Date;
 	deliveryAddress: string;
@@ -11,7 +12,7 @@ class Order extends Cart {
 	public createdAt: Date;
 	public deliveryAddress: string;
 
-	constructor(dataMembers: Order) {
+	constructor(dataMembers: OrderProps) {
 		super(dataMembers);
 		const { id, createdAt, deliveryAddress } = dataMembers;
 
@@ -29,6 +30,26 @@ class Order extends Cart {
 	public get status(): string {
 		return this.eta > new Date(Date.now()) ? 'Preparing' : 'Delivering';
 		//TODO: ^^ Fix this
+	}
+
+	public static async fromDB(id: number): Promise<Order> {
+		const order = await prisma.orders.findUnique({ where: { id } });
+		if (!order) throw new Error(`Order ${id} not found`);
+
+		const items = await prisma.order_items.findMany({ where: { orderId: id } });
+		const cart = new Cart({ userId: order.userId, items: [] });
+
+		for (const item of items) {
+			const dish = await prisma.dishes.findUnique({ where: { id: item.dishId } });
+			if (!dish) throw new Error(`Dish ${item.dishId} not found`);
+
+			const allergens = dish.allergens.split(',') as string[];
+
+			cart.addItem({ ...dish, allergens });
+			cart.changeQuantity(dish.id, item.quantity - 1);
+		}
+
+		return new Order({ ...order, items: cart.items });
 	}
 }
 

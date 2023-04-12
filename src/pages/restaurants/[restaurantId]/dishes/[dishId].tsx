@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export type Dish = Omit<DishItem, 'type'>;
 
@@ -38,6 +39,9 @@ const Dish: NextPage = () => {
 						data.allergens.length ? data.allergens.join(', ') : 'None'
 					}`}</span>
 					<span className='font-md font-medium'>{`Price: ${data.price} ₹`}</span>
+					<Link className='text-primary hover:underline font-md text-md' href={`/restaurants/${data.restaurantId}`}>
+						View Restaurant
+					</Link>
 				</div>
 			)}
 		</>

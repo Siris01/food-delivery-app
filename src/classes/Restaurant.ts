@@ -1,6 +1,7 @@
 import Dish from '@classes/Dish';
+import prisma from '@prisma';
 
-interface Restaurant {
+export interface RestaurantProps {
 	id: number;
 	name: string;
 	image: string;
@@ -17,7 +18,7 @@ class Restaurant {
 	public location: string;
 	public dishes: Dish[];
 
-	constructor(dataMembers: Restaurant) {
+	constructor(dataMembers: RestaurantProps) {
 		const { id, name, image, about, location, dishes } = dataMembers;
 
 		this.id = id;
@@ -30,6 +31,16 @@ class Restaurant {
 
 	public calculateDistance(location: string): number {
 		return 1.5; //TODO: calculate distance
+	}
+
+	public static async fromDB(id: number): Promise<Restaurant> {
+		const restaurant = await prisma.restaurants.findUnique({ where: { id } });
+		if (!restaurant) throw new Error(`Restaurant ${id} not found`);
+
+		const rawDishes = await prisma.dishes.findMany({ where: { restaurantId: id } });
+		const dishes = await Promise.all(rawDishes.map(async (d) => await Dish.fromDB(d.id)));
+
+		return new Restaurant({ ...restaurant, dishes });
 	}
 }
 

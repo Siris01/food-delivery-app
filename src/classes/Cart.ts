@@ -4,7 +4,7 @@ export type CartItem = Dish & {
 	quantity: number;
 };
 
-interface Cart {
+export interface CartProps {
 	userId: number;
 	items: CartItem[];
 }
@@ -13,7 +13,7 @@ class Cart {
 	public userId: number;
 	public items: CartItem[];
 
-	constructor(dataMembers: Cart) {
+	constructor(dataMembers: CartProps) {
 		const { userId, items } = dataMembers;
 
 		this.userId = userId;

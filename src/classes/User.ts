@@ -1,4 +1,4 @@
-interface User {
+export interface UserProps {
 	id: number;
 	username: string;
 	email: string;
@@ -11,7 +11,7 @@ class User {
 	public email: string;
 	public password: string;
 
-	constructor(dataMembers: User) {
+	constructor(dataMembers: UserProps) {
 		const { id, username, email, password } = dataMembers;
 
 		this.id = id;

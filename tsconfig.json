@@ -10,7 +10,8 @@
 			"@api/*": ["src/pages/api/*"],
 			"@pages/*": ["src/pages/*"],
 			"@styles/*": ["src/styles/*"],
-			"@classes/*": ["src/classes/*"]
+			"@classes/*": ["src/classes/*"],
+			"@prisma": ["prisma/db.ts"]
 		},
 		"allowJs": true,
 		"skipLibCheck": true,

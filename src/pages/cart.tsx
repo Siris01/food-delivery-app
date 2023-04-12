@@ -74,6 +74,12 @@ const CartItemCard = (props: CardItemCardProps) => {
 							onClick={() => {
 								props.setData((items) => {
 									const item = items!.find((i) => i.id === props.id)!;
+
+									if (item.quantity === 1 && c === '-') {
+										const response = confirm(`Do you want to remove ${item.name} from your cart?`);
+										if (!response) return items;
+									}
+
 									item.quantity += c === '+' ? 1 : -1;
 									return [...items!.filter((i) => i.quantity > 0)];
 								});

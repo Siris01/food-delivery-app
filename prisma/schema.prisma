@@ -10,31 +10,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model dish {
-  id            Int    @id @default(autoincrement())
-  restaurant_id Int
-  name          String
-  image         String
-  allergens     String // comma separated list of allergens
-  price         Int
+model dishes {
+  id           Int    @id @default(autoincrement())
+  restaurantId Int    @map("restaurant_id")
+  name         String
+  image        String
+  allergens    String // comma separated list of allergens
+  price        Int
 }
 
-model order {
-  id               Int      @id @default(autoincrement())
-  delivery_address String
-  created_at       DateTime @default(now())
-  user_id          Int
-  status           String
+model orders {
+  id              Int      @id @default(autoincrement())
+  deliveryAddress String   @map("delivery_address")
+  createdAt       DateTime @default(now()) @map("created_at")
+  userId          Int      @map("user_id")
+  status          String
 }
 
-model order_item {
+model order_items {
   id       Int @id @default(autoincrement())
-  order_id Int
-  dish_id  Int
+  orderId  Int @map("order_id")
+  dishId   Int @map("dish_id")
   quantity Int
 }
 
-model restaurant {
+model restaurants {
   id       Int    @id @default(autoincrement())
   name     String
   image    String
@@ -42,7 +42,7 @@ model restaurant {
   location String
 }
 
-model user {
+model users {
   id       Int    @id @default(autoincrement())
   username String
   email    String @unique
