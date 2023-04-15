@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<>
 			<Head>
 				<title>FDA</title>
+				<link rel="shortcut icon" href="/favicon.ico" />
 				<meta property='og:title' content='FDA' />
 				<meta property='og:description' content='Food delivery app' />
 				<meta property='theme-color' content='#FE5001' />

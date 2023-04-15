@@ -13,17 +13,16 @@ interface CardProps {
 const Card = (props: CardProps) => {
 	const card = (
 		<div
-			className={`inline-flex flex-row items-center p-2 m-2 min-w-[24rem] max-w-[24rem] shadow border-2 border-black rounded-lg bg-black/70 ${
-				!props.disableHoverEffects && 'hover:border-primary hover:scale-105'
-			}`}
+			className={`inline-flex flex-row items-center p-2 m-2 min-w-[24rem] max-w-[24rem] shadow border-2 border-black rounded-lg bg-black/70 ${!props.disableHoverEffects && 'hover:border-primary hover:scale-105'
+				}`}
 		>
 			<div className='relative min-h-[12rem] min-w-[6rem]'>
 				<Image fill src={props.image} alt={'Image of restaurant/dish'} className='object-cover rounded-lg' />
 			</div>
 			<div className='flex flex-col min-h-[12rem] w-full justify-start p-4 leading-normal'>
 				<div className='flex flex-row mb-2 justify-between items-center'>
-					<h5 className='text-2xl font-bold tracking-tight text-primary'>{props.title}</h5>
-					<span className='text-sm text-white/90'>{props.subText}</span>
+					<h5 className='text-2xl text-left font-bold tracking-tight text-primary'>{props.title}</h5>
+					<span className='text-sm text-right text-white/90'>{props.subText}</span>
 				</div>
 				<p className='mb-3 font-normal text-white/90'>{props.text}</p>
 			</div>

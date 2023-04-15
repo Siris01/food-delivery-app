@@ -1,3 +1,7 @@
+/*
+ * Taken from https://github.com/mantinedev/mantine/tree/master/src/mantine-hooks/src/use-local-storage
+ */
+
 //@ts-nocheck
 
 import { useState, useCallback, useEffect } from 'react';

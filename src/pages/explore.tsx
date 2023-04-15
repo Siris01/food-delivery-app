@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { SearchItem } from '@api/search';
 import Card from '@components/Card';
 import fetcher from '@utils/fetcher';
+import useLocation from '@hooks/useLocation';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
 //TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
@@ -12,8 +13,9 @@ import fetcher from '@utils/fetcher';
 const Explore: NextPage = () => {
 	const [search, setSearch] = useState('');
 	const [data, setData] = useState<SearchItem[] | null>(null);
+	const { location } = useLocation();
 
-	const SearchButton = //@ts-ignore
+	const SearchButton =
 		(
 			<div
 				id='submit'
@@ -25,9 +27,11 @@ const Explore: NextPage = () => {
 		);
 
 	useEffect(() => {
-		fetcher(`/api/search?q=${search}`)
+		if (!location) return;
+
+		fetcher(`/api/search?q=${search}&lat=${location.lat}&lon=${location.lon}`)
 			.then((data) => setData(data.results));
-	}, [search]);
+	}, [search, location]);
 
 	return (
 		<div className='flex flex-col items-center justify-center m-4'>
@@ -59,7 +63,7 @@ const Explore: NextPage = () => {
 						else if (d.type === 'dish')
 							return (
 								<Card
-									key={d.id}
+									key={`${d.restaurantId}-${d.id}`}
 									title={d.name}
 									image={d.image}
 									href={`/restaurants/${d.restaurantId}/dishes/${d.id}`}

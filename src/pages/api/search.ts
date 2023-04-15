@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { cuisines } from '@pages/explore';
 import prisma from '@prisma';
+import distance from '@utils/distance';
+import OpenLocationCode from '@utils/plusCodes';
 
 export interface RestaurantItem {
 	id: number;
@@ -26,6 +28,8 @@ export type SearchItem = RestaurantItem | DishItem;
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== 'GET') return res.status(405).end();
 	const query = req.query.q as string;
+	const lat = req.query.lat as string;
+	const lon = req.query.lon as string;
 
 	if (cuisines.map((c) => c.title.toLowerCase()).includes(query)) {
 		// TODO: Search for restaurants with the given cuisine
@@ -45,14 +49,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	}
 
 	for (const restaurant of restaurants) {
+		const restaurantLocation = OpenLocationCode.decode(restaurant.location);
+		const dist = distance(
+			{ lat: parseFloat(lat), lon: parseFloat(lon) },
+			{ lat: restaurantLocation.latitudeCenter, lon: restaurantLocation.longitudeCenter }
+		);
+
 		results.push({
 			...restaurant,
 			type: 'restaurant',
-			distance: Math.floor(Math.random() * 1000) //TODO: Calc dist b/w user and restaurant.location and send back
+			distance: parseFloat(dist.toFixed(2))
 		});
 	}
 
 	res.status(200).json({ results });
 }
-
-//TODO: Search for the query in the database

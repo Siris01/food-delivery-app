@@ -15,7 +15,7 @@ async function main() {
 			name: 'Restaurant foo',
 			image: 'https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg',
 			about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			location: 'haven.headings.porch'
+			location: '7M52379F+6Q'
 		}
 	});
 
@@ -24,7 +24,7 @@ async function main() {
 			name: 'Restaurant bar',
 			image: 'https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784__340.jpg',
 			about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			location: 'whispers.damage.swordfish'
+			location: '7M522725+HJ'
 		}
 	});
 
