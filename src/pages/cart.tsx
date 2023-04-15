@@ -25,7 +25,7 @@ const Cart: NextPage = () => {
 				{data && data.length ? (
 					data.map((d) => <CartItemCard key={d.id} setData={setData} {...d} />)
 				) : data ? (
-					<span className='font-2xl text-primary font-bold'>Cart is empty</span>
+					<span className='font-2xl font-bold'>Cart is empty</span>
 				) : (
 					<></>
 				)}

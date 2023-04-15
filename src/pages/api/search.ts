@@ -24,6 +24,7 @@ export interface DishItem {
 export type SearchItem = RestaurantItem | DishItem;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	if (req.method !== 'GET') return res.status(405).end();
 	const query = req.query.q as string;
 
 	if (cuisines.map((c) => c.title.toLowerCase()).includes(query)) {

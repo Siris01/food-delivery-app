@@ -5,10 +5,14 @@ import { IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { theme } from '@utils/config';
+import { useRouter } from 'next/router'
+import { toast } from 'react-hot-toast';
+import fetcher from '@utils/fetcher';
 
 const Login: NextPage = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	const router = useRouter();
 
 	return (
 		<div className='flex items-center justify-center'>
@@ -38,6 +42,17 @@ const Login: NextPage = () => {
 					<button
 						id='submit'
 						className='flex flex-row !mt-6 p-4 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md justify-center w-full'
+						onClick={() => {
+							fetcher('/api/auth/login', {
+								method: 'POST',
+								body: JSON.stringify({ email, password })
+							})
+								.then(async (res) => {
+									if (!res.ok) return;
+									await router.push('/');
+									toast.success('Logged in successfully!');
+								})
+						}}
 					>
 						<span className='font-bold'>Login</span>
 						<IconArrowRight className='ml-2 font-bold' color={theme} />

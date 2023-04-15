@@ -48,3 +48,9 @@ model users {
   email    String @unique
   password String
 }
+
+model sessions {
+  id        Int    @id @default(autoincrement())
+  userId    Int    
+  token   String
+}

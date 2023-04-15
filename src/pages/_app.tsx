@@ -6,6 +6,7 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import { Outfit } from 'next/font/google';
 import Nav from '@components/Nav';
+import { Toaster } from 'react-hot-toast';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -34,6 +35,26 @@ export default function App({ Component, pageProps }: AppProps) {
 					>
 						<Component {...pageProps} />
 					</div>
+					<Toaster
+						position='top-center'
+						reverseOrder={true}
+						toastOptions={{
+							duration: 6_000,
+							className: 'text-center',
+							success: {
+								style: {
+									background: '#0A4205',
+									color: '#66F359'
+								}
+							},
+							error: {
+								style: {
+									background: '#42050A',
+									color: '#f35966'
+								}
+							}
+						}}
+					/>
 				</div>
 			</main>
 		</>
