@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast';
 
-export default async function fetcher(url: string, options: RequestInit = {}): Promise<Record<any, any>> {
+export default async function fetcher(url: string, options: RequestInit = {}): Promise<any> {
 	const isJson = (options.body as string)?.startsWith('{') && (options.body as string)?.endsWith('}');
 
 	const fetchOptions = {

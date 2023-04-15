@@ -6,6 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	if (req.method !== 'POST') return res.status(405).end();
 
 	const { username, email, password } = req.body;
+	if (!username || !email || !password) return res.status(404).send('Missing credentials');
 
 	const user = await prisma.users.create({
 		data: {
@@ -22,5 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		}
 	});
 
-	return res.setHeader('Set-Cookie', `token=${session.token}; path=/; httponly secure`).status(204);
+	res
+		.setHeader('Set-Cookie', [
+			`token=${session.token}; Path=/; HttpOnly; Secure`,
+			`username=${user.username}; Path=/; Secure`
+		])
+		.status(204)
+		.end();
 }

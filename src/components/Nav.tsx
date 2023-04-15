@@ -1,6 +1,6 @@
 import Logo from '@components/Logo';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Spin as Hamburger } from 'hamburger-react';
 
 const links = [
@@ -12,6 +12,14 @@ const links = [
 
 export default function Nav() {
 	const [open, setOpen] = useState(false);
+	const [loggedInAs, setLoggedInAs] = useState<null | string>(null);
+
+	useEffect(() => {
+		const cookies = document.cookie.split(';').map((c) => c.trim());
+		const username = cookies.find((cookie) => cookie.startsWith('username='))?.split('=')?.[1];
+
+		if (username) setLoggedInAs(username);
+	}, []);
 
 	return (
 		<nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/60 before:border-black'>
@@ -30,18 +38,25 @@ export default function Nav() {
 					</div>
 				</div>
 				<div className='hidden mr-2 md:flex items-center justify-end md:justify-center'>
-					{['Login', 'Sign Up'].map((name) => {
-						const href = name.toLowerCase().replaceAll(' ', '');
-						return (
-							<Link
-								key={href}
-								href={`/${href}`}
-								className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
-							>
-								{name}
-							</Link>
-						);
-					})}
+					{loggedInAs ? (
+						<Link
+							href='/profile'
+							className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-full'
+						>{`Welcome, ${loggedInAs}!`}</Link>
+					) : (
+						['Login', 'Sign Up'].map((name) => {
+							const href = name.toLowerCase().replaceAll(' ', '');
+							return (
+								<Link
+									key={href}
+									href={`/${href}`}
+									className='font-bold text-lg px-4 p-2 m-2 bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
+								>
+									{name}
+								</Link>
+							);
+						})
+					)}
 				</div>
 				<div className='mr-2 md:hidden'>
 					<button
@@ -72,19 +87,26 @@ export default function Nav() {
 					))}
 				</div>
 				<div className='px-5 py-4 space-y-4'>
-					{['Login', 'Sign Up'].map((name) => {
-						const href = name.toLowerCase().replaceAll(' ', '');
-						return (
-							<Link
-								onClick={() => setOpen(false)}
-								key={href}
-								href={`/${href}`}
-								className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-md shadow'
-							>
-								{name}
-							</Link>
-						);
-					})}
+					{loggedInAs ? (
+						<Link
+							href='/profile'
+							className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-full shadow'
+						>{`Logged in as ${loggedInAs}`}</Link>
+					) : (
+						['Login', 'Sign Up'].map((name) => {
+							const href = name.toLowerCase().replaceAll(' ', '');
+							return (
+								<Link
+									onClick={() => setOpen(false)}
+									key={href}
+									href={`/${href}`}
+									className='block w-full px-5 py-3 text-base font-bold text-center bg-dualtone hover:bg-dualtone/70 text-primary border border-transparent rounded-md shadow'
+								>
+									{name}
+								</Link>
+							);
+						})
+					)}
 				</div>
 			</div>
 		</nav>

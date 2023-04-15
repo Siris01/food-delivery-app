@@ -57,12 +57,11 @@ const Signup: NextPage = () => {
 							fetcher('/api/auth/signup', {
 								method: 'POST',
 								body: JSON.stringify({ username, email, password })
-							})
-								.then(async (res) => {
-									if (!res.ok) return;
-									await router.push('/');
-									toast.success('Signed up successfully!');
-								})
+							}).then(async (res) => {
+								if (!res.ok) return;
+								await router.push('/');
+								toast.success('Signed up successfully!');
+							});
 						}}
 					>
 						<span className='font-bold'>Sign Up</span>

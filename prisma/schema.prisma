@@ -51,6 +51,6 @@ model users {
 
 model sessions {
   id        Int    @id @default(autoincrement())
-  userId    Int    
+  userId    Int    @map("user_id")
   token   String
 }

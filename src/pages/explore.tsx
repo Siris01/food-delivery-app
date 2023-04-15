@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { SearchItem } from '@api/search';
 import Card from '@components/Card';
+import fetcher from '@utils/fetcher';
 
 //TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
 //TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
@@ -24,8 +25,7 @@ const Explore: NextPage = () => {
 		);
 
 	useEffect(() => {
-		fetch(`/api/search?q=${search}`)
-			.then((res) => res.json())
+		fetcher(`/api/search?q=${search}`)
 			.then((data) => setData(data.results));
 	}, [search]);
 

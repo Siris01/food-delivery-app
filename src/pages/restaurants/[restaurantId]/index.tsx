@@ -1,10 +1,12 @@
 import { RestaurantItem, DishItem } from '@api/search';
 import { NextPage } from 'next';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Card from '@components/Card';
 import { CartItem } from '@pages/cart';
 import { useRouter } from 'next/router';
+import fetcher from '@utils/fetcher';
+import usePersistentState from '@hooks/usePersistentState';
 
 export type Restaurant = Omit<RestaurantItem, 'type'> & {
 	menu: Omit<DishItem, 'type'>[];
@@ -12,7 +14,7 @@ export type Restaurant = Omit<RestaurantItem, 'type'> & {
 
 const Restaurant: NextPage = () => {
 	const [data, setData] = useState<Restaurant | null>(null);
-	const [cart, setCart] = useState<CartItem[]>([]);
+	const [cart, setCart] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
 	const router = useRouter();
 
 	//TODO: Store distance as w3w? and calc distance before setting data
@@ -20,8 +22,7 @@ const Restaurant: NextPage = () => {
 		const restaurantId = router.query.restaurantId;
 		if (!restaurantId) return;
 
-		fetch(`/api/restaurants/${restaurantId}`)
-			.then((res) => res.json())
+		fetcher(`/api/restaurants/${restaurantId}`)
 			.then((data) => setData(data));
 	}, [router.query.dishId, router.query.restaurantId]);
 
@@ -67,7 +68,7 @@ export default Restaurant;
 type RestaurantMenuCardProps = Restaurant['menu'][0] & {
 	cart: CartItem[];
 	href?: string;
-	setData: Dispatch<SetStateAction<CartItem[]>>;
+	setData: (val: CartItem[] | ((prevState: CartItem[]) => CartItem[])) => void;
 };
 
 const RestaurantMenuCard = (props: RestaurantMenuCardProps) => {

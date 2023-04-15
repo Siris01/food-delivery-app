@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import fetcher from '@utils/fetcher';
 
 export type Dish = Omit<DishItem, 'type'>;
 
@@ -16,8 +17,7 @@ const Dish: NextPage = () => {
 		const dishId = router.query.dishId;
 		if (!restaurantId || !dishId) return;
 
-		fetch(`/api/restaurants/${restaurantId}/dishes/${dishId}`)
-			.then((res) => res.json())
+		fetcher(`/api/restaurants/${restaurantId}/dishes/${dishId}`)
 			.then((data) => setData(data));
 	}, [router.query.dishId, router.query.restaurantId]);
 
@@ -34,9 +34,8 @@ const Dish: NextPage = () => {
 						/>
 					</div>
 					<h1 className='text-primary font-bold text-4xl'>{data.name}</h1>
-					<span className='font-lg font-medium'>{`Allergens: ${
-						data.allergens.length ? data.allergens.join(', ') : 'None'
-					}`}</span>
+					<span className='font-lg font-medium'>{`Allergens: ${data.allergens.length ? data.allergens.join(', ') : 'None'
+						}`}</span>
 					<span className='font-md font-medium'>{`Price: ${data.price} ₹`}</span>
 					<Link className='text-primary hover:underline font-md text-md' href={`/restaurants/${data.restaurantId}`}>
 						View Restaurant

@@ -5,7 +5,7 @@ import { IconArrowRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { theme } from '@utils/config';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { toast } from 'react-hot-toast';
 import fetcher from '@utils/fetcher';
 
@@ -46,12 +46,12 @@ const Login: NextPage = () => {
 							fetcher('/api/auth/login', {
 								method: 'POST',
 								body: JSON.stringify({ email, password })
-							})
-								.then(async (res) => {
-									if (!res.ok) return;
-									await router.push('/');
-									toast.success('Logged in successfully!');
-								})
+							}).then((res) => {
+								if (!res.ok) return;
+
+								toast.success('Logged in successfully!');
+								router.push('/').then(() => router.reload());
+							});
 						}}
 					>
 						<span className='font-bold'>Login</span>

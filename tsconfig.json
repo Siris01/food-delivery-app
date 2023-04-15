@@ -9,6 +9,7 @@
 			"@db": ["src/utils/prisma.ts"],
 			"@api/*": ["src/pages/api/*"],
 			"@pages/*": ["src/pages/*"],
+			"@hooks/*": ["src/hooks/*"],
 			"@styles/*": ["src/styles/*"],
 			"@classes/*": ["src/classes/*"],
 			"@prisma": ["prisma/db.ts"]

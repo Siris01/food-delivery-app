@@ -1,20 +1,15 @@
 import { NextPage } from 'next';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Card from '@components/Card';
 import { DishItem } from '@api/search';
 import Link from 'next/link';
+import usePersistentState from '@hooks/usePersistentState';
 
 export type CartItem = Omit<DishItem, 'type'> & {
 	quantity: number;
 };
 
 const Cart: NextPage = () => {
-	const [data, setData] = useState<CartItem[] | null>(null);
-
-	useEffect(() => {
-		const cartItems = JSON.parse(localStorage.getItem('cart') ?? '[]');
-		setData(cartItems);
-	}, []);
+	const [data, setData] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
 
 	return (
 		<div className='flex flex-col items-center justify-center m-4'>
@@ -40,7 +35,7 @@ const Cart: NextPage = () => {
 export default Cart;
 
 type CardItemCardProps = CartItem & {
-	setData: Dispatch<SetStateAction<CartItem[] | null>>;
+	setData: (val: CartItem[] | ((prevState: CartItem[]) => CartItem[])) => void;
 };
 
 const CartItemCard = (props: CardItemCardProps) => {

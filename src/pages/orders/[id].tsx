@@ -1,4 +1,5 @@
 import { Order as OrderType } from '@api/orders/index';
+import fetcher from '@utils/fetcher';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -10,8 +11,7 @@ const Order: NextPage = () => {
 		const id = router.query.id;
 		if (!id) return;
 
-		fetch(`/api/orders/${id}`)
-			.then((res) => res.json())
+		fetcher(`/api/orders/${id}`)
 			.then((data) => setData(data));
 	}, [router.query.id]);
 
