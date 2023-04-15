@@ -28,10 +28,10 @@ const Checkout: NextPage = () => {
 					<span className='font-2xl text-primary font-bold'>Loading...</span>
 				)}
 			</div>
-			<span className='text-lg'>Total amount: {data?.map((d) => d.price)?.reduce((a, b) => a + b, 0)}</span>
+			<span className='text-lg'>Total amount: {data?.map((d) => d.price * d.quantity)?.reduce((a, b) => a + b, 0)}</span>
 		</div>
 	);
 };
 
 export default Checkout;
-//TODO: Proper Checkout page
+//TODO: Confirm order button, takes to orders/:id page
