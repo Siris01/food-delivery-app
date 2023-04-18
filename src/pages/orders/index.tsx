@@ -1,22 +1,15 @@
 import { Order } from '@api/orders';
+import fetcher from '@utils/fetcher';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { accurateDiff } from '@utils/date';
 
-const Track: NextPage = () => {
+const Orders: NextPage = () => {
 	const [data, setData] = useState<Order[] | null>(null);
 
 	useEffect(() => {
-		/*
-		//TODO: Get orders
-		*/
-		setData([
-			{
-				id: 1231234,
-				eta: 45,
-				items: []
-			}
-		]);
+		fetcher('/api/orders').then((data) => setData(data.orders));
 	}, []);
 
 	return (
@@ -27,13 +20,15 @@ const Track: NextPage = () => {
 			<div className='mt-8 flex flex-col space-y-4 justify-items-center'>
 				{data && data.length ? (
 					data
-						.sort((a, b) => a.eta - b.eta)
+						.sort((b, a) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
 						.map((d) => (
 							<div key={d.id}>
 								<Link href={`/orders/${d.id}`} className='text-primary hover:underline'>
-									{d.id.toString().slice(0, 5)}...
+									Order #{d.id}
 								</Link>{' '}
-								<span>(Arriving in {d.eta}m)</span>
+								<span>
+									({d.eta ? `Arriving in ${accurateDiff(Math.round(new Date(d.eta).getTime() / 1000))}` : d.status})
+								</span>
 							</div>
 						))
 				) : data ? (
@@ -46,4 +41,4 @@ const Track: NextPage = () => {
 	);
 };
 
-export default Track;
+export default Orders;

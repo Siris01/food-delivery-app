@@ -7,7 +7,7 @@ const links = [
 	{ title: 'Home', href: '/' },
 	{ title: 'Explore', href: '/explore' },
 	{ title: 'Cart', href: '/cart' },
-	{ title: 'Track', href: '/track' }
+	{ title: 'Orders', href: '/orders' }
 ];
 
 export default function Nav() {

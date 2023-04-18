@@ -18,7 +18,7 @@ export default async function fetcher(url: string, options: RequestInit = {}): P
 		}
 	}
 
-	if (res.body) toast.error(await res.text());
+	if (res.headers.has('Content-Type')) toast.error(await res.text());
 	else toast.error(`An error occurred, status code: ${res.status}`);
 	return { ok: false };
 }

@@ -25,10 +25,10 @@ const Profile: NextPage = () => {
 				<h6 className='mb-6 text-4xl font-bold text-center text-primary md:text-3xl'>Welcome {loggedInAs}!</h6>
 				<div className='flex flex-row space-x-4'>
 					<Link
-						href='/track'
+						href='/orders'
 						className='px-6 py-2 text-md font-bold rounded-md text-slate bg-primary hover:bg-primary/70'
 					>
-						Track your order
+						Track your orders
 					</Link>
 					<Link
 						href='/logout'

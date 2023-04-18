@@ -20,11 +20,12 @@ model dishes {
 }
 
 model orders {
-  id              Int      @id @default(autoincrement())
-  deliveryAddress String   @map("delivery_address")
-  createdAt       DateTime @default(now()) @map("created_at")
-  userId          Int      @map("user_id")
+  id              Int       @id @default(autoincrement())
+  deliveryAddress String    @map("delivery_address")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  userId          Int       @map("user_id")
   status          String
+  eta             DateTime?
 }
 
 model order_items {
@@ -40,7 +41,7 @@ model restaurants {
   image    String
   about    String
   location String
-  cuisine  String 
+  cuisine  String
 }
 
 model users {
@@ -51,7 +52,7 @@ model users {
 }
 
 model sessions {
-  id        Int    @id @default(autoincrement())
-  userId    Int    @map("user_id")
-  token   String
+  id     Int    @id @default(autoincrement())
+  userId Int    @map("user_id")
+  token  String
 }
