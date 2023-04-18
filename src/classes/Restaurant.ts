@@ -7,6 +7,7 @@ export interface RestaurantProps {
 	image: string;
 	about: string;
 	location: string;
+	cuisine: string;
 	dishes: Dish[];
 }
 

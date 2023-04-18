@@ -40,6 +40,7 @@ model restaurants {
   image    String
   about    String
   location String
+  cuisine  String 
 }
 
 model users {

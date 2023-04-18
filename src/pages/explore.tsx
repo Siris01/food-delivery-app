@@ -23,6 +23,8 @@ const Explore: NextPage = () => {
 
 	useEffect(() => {
 		if (!location) return;
+		const cuisine = window?.location?.search?.match(/\?cuisine\=(\w+)/)?.[1];
+		if (cuisine) setSearch(cuisine);
 
 		fetcher(`/api/search?q=${search}&lat=${location.lat}&lon=${location.lon}`).then((data) => setData(data.results));
 	}, [search, location]);

@@ -11,6 +11,7 @@ export interface RestaurantItem {
 	about: string;
 	name: string;
 	location: string;
+	cuisine: string;
 	distance?: number;
 }
 
@@ -38,7 +39,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const results: SearchItem[] = [];
 
-	const dishes = await prisma.dishes.findMany({ where: { name: { contains: query } }, take: 10 });
+	const dishes = await prisma.dishes.findMany({
+		where: { OR: [{ cuisine: { contains: query } }, { name: { contains: query } }] },
+		take: 10
+	});
 	const restaurants = await prisma.restaurants.findMany({ where: { name: { contains: query } }, take: 10 });
 
 	for (const dish of dishes) {

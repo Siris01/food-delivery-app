@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function main() {
+async function populateMockData() {
 	await prisma.users.create({
 		data: {
 			username: 'Admin',
@@ -15,7 +15,8 @@ async function main() {
 			name: 'Restaurant foo',
 			image: 'https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg',
 			about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			location: '7M52379F+6Q'
+			location: '7M52379F+6Q',
+			cuisine: 'Italian'
 		}
 	});
 
@@ -24,7 +25,8 @@ async function main() {
 			name: 'Restaurant bar',
 			image: 'https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784__340.jpg',
 			about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-			location: '7M522725+HJ'
+			location: '7M522725+HJ',
+			cuisine: 'Mexican'
 		}
 	});
 
@@ -49,4 +51,4 @@ async function main() {
 	});
 }
 
-main();
+populateMockData();
