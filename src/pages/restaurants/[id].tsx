@@ -7,6 +7,10 @@ import { CartItem } from '@pages/cart';
 import { useRouter } from 'next/router';
 import fetcher from '@utils/fetcher';
 import usePersistentState from '@hooks/usePersistentState';
+import Link from 'next/link';
+import calculateDistance from '@utils/calculateDistance';
+import useLocation from '@hooks/useLocation';
+import OpenLocationCode from '@utils/plusCodes';
 
 export type Restaurant = Omit<RestaurantItem, 'type'> & {
 	menu: Omit<DishItem, 'type'>[];
@@ -16,15 +20,35 @@ const Restaurant: NextPage = () => {
 	const [data, setData] = useState<Restaurant | null>(null);
 	const [cart, setCart] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
 	const router = useRouter();
+	const { location } = useLocation();
 
-	//TODO: Store distance as w3w? and calc distance before setting data
 	useEffect(() => {
-		const restaurantId = router.query.restaurantId;
-		if (!restaurantId) return;
+		const id = router.query.id;
+		if (!id) return;
 
-		fetcher(`/api/restaurants/${restaurantId}`)
-			.then((data) => setData(data));
-	}, [router.query.dishId, router.query.restaurantId]);
+		fetcher(`/api/restaurants/${id}`).then((data) => {
+			const restaurantLocation = OpenLocationCode.decode(data.location);
+			const dist = calculateDistance(
+				{ lat: location?.lat ?? 0, lon: location?.lon ?? 0 },
+				{ lat: restaurantLocation.latitudeCenter, lon: restaurantLocation.longitudeCenter }
+			);
+
+			setData({
+				...data,
+				distance: parseFloat(dist.toFixed(2))
+			});
+
+			const dish = window?.location?.search?.match(/\?dish\=(\d+)/)?.[1];
+			if (!dish) return;
+
+			const card = document.getElementById(`dish-${dish}`);
+			if (!card) return;
+
+			card.scrollIntoView({ behavior: 'smooth' });
+			setTimeout(() => card.classList.add('!border-primary'), 300);
+			setTimeout(() => card.classList.remove('!border-primary'), 6_000);
+		});
+	}, [router.query.dishId, router.query.id, location?.lat, location?.lon]);
 
 	return (
 		<>
@@ -39,7 +63,14 @@ const Restaurant: NextPage = () => {
 						/>
 					</div>
 					<h1 className='text-primary font-bold text-4xl'>{data.name}</h1>
-					<p className='font-lg font-medium'>{data.about}</p>
+					<span className='font-medium text-md'>
+						Location:{' '}
+						<Link href={`https://plus.codes/${data.location}`} target='_about' className='text-primary hover:underline'>
+							{data.location}
+						</Link>{' '}
+						<span className='font-light'>({data.distance} km away from you)</span>
+					</span>
+					<p className='text-lg font-medium'>{data.about}</p>
 					<span className='my-6 text-center text-3xl font-bold text-primary'>Menu</span>
 					<div className='mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 						{data.menu.map((d) => (
@@ -49,7 +80,6 @@ const Restaurant: NextPage = () => {
 								restaurantId={d.restaurantId}
 								name={d.name}
 								image={d.image}
-								href={`/restaurants/${router.query.restaurantId}/dishes/${d.id}`}
 								allergens={d.allergens}
 								price={d.price}
 								cart={cart}
@@ -73,34 +103,37 @@ type RestaurantMenuCardProps = Restaurant['menu'][0] & {
 
 const RestaurantMenuCard = (props: RestaurantMenuCardProps) => {
 	return (
-		<div className='inline-block max-w-fit relative'>
+		<div id={`dish-${props.id}`} className='inline-block max-w-fit relative rounded-md border-2 border-transparent'>
 			<Card
 				disableHoverEffects
 				href={props.href}
 				title={props.name}
 				image={props.image}
 				subText={`Price: ${props.price}`}
-				text={props.allergens.length ? `Allergens: ${props.allergens}` : 'No allergens'}
+				text={`Allergens: ${props.allergens.length ? props.allergens.join(', ') : 'None'}`}
 			/>
 			<div className='absolute bottom-4 right-4 space-x-4'>
 				{props.cart.some((i) => i.id === props.id) ? (
-					['+', '-'].map((c) => {
-						return (
-							<button
-								key={c}
-								onClick={() => {
-									props.setData((items) => {
-										const item = items!.find((i) => i.id === props.id)!;
-										item.quantity += c === '+' ? 1 : -1;
-										return [...items!.filter((i) => i.quantity > 0)];
-									});
-								}}
-								className='bg-dualtone hover:bg-dualtone/70 text-primary rounded-full p-2 w-12 h-12 font-black text-xl'
-							>
-								{c}
-							</button>
-						);
-					})
+					<>
+						{['+', '-'].map((c) => {
+							return (
+								<button
+									key={c}
+									onClick={() => {
+										props.setData((items) => {
+											const item = items!.find((i) => i.id === props.id)!;
+											item.quantity += c === '+' ? 1 : -1;
+											return [...items!.filter((i) => i.quantity > 0)];
+										});
+									}}
+									className='bg-dualtone hover:bg-dualtone/70 text-primary rounded-full p-2 w-12 h-12 font-black text-xl'
+								>
+									{c}
+								</button>
+							);
+						})}
+						<span>{props.cart.find((i) => i.id === props.id)?.quantity ?? 0}</span>
+					</>
 				) : (
 					<button
 						onClick={() => {

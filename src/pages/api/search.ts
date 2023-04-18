@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { cuisines } from '@pages/explore';
 import prisma from '@prisma';
-import distance from '@utils/distance';
+import calculateDistance from '@utils/calculateDistance';
 import OpenLocationCode from '@utils/plusCodes';
 
 export interface RestaurantItem {
@@ -10,7 +10,8 @@ export interface RestaurantItem {
 	type: 'restaurant';
 	about: string;
 	name: string;
-	distance: number;
+	location: string;
+	distance?: number;
 }
 
 export interface DishItem {
@@ -50,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	for (const restaurant of restaurants) {
 		const restaurantLocation = OpenLocationCode.decode(restaurant.location);
-		const dist = distance(
+		const dist = calculateDistance(
 			{ lat: parseFloat(lat), lon: parseFloat(lon) },
 			{ lat: restaurantLocation.latitudeCenter, lon: restaurantLocation.longitudeCenter }
 		);

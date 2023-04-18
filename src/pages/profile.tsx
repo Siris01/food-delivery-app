@@ -14,7 +14,7 @@ const Profile: NextPage = () => {
 
 		if (username) setLoggedInAs(username);
 		else {
-			toast.error('You must be logged in to view this page!')
+			toast.error('You must be logged in to view this page!');
 			router.push('/login');
 		}
 	}, [router]);
@@ -24,10 +24,16 @@ const Profile: NextPage = () => {
 			<div className='flex flex-col items-center'>
 				<h6 className='mb-6 text-4xl font-bold text-center text-primary md:text-3xl'>Welcome {loggedInAs}!</h6>
 				<div className='flex flex-row space-x-4'>
-					<Link href='/track' className='px-6 py-2 text-md font-bold rounded-md text-slate bg-primary hover:bg-primary/70'>
+					<Link
+						href='/track'
+						className='px-6 py-2 text-md font-bold rounded-md text-slate bg-primary hover:bg-primary/70'
+					>
 						Track your order
 					</Link>
-					<Link href='/logout' className='px-6 py-2 text-md font-bold rounded-md text-slate bg-primary hover:bg-primary/70'>
+					<Link
+						href='/logout'
+						className='px-6 py-2 text-md font-bold rounded-md text-slate bg-primary hover:bg-primary/70'
+					>
 						Log out
 					</Link>
 				</div>

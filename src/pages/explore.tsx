@@ -15,22 +15,16 @@ const Explore: NextPage = () => {
 	const [data, setData] = useState<SearchItem[] | null>(null);
 	const { location } = useLocation();
 
-	const SearchButton =
-		(
-			<div
-				id='submit'
-				onClick={(_) => console.log(`Searched for ${search}`)}
-				className='cursor-pointer hover:scale-110'
-			>
-				<Image src='/icons/search.svg' alt='search' width={32} height={32} />
-			</div>
-		);
+	const SearchButton = (
+		<div id='submit' onClick={(_) => console.log(`Searched for ${search}`)} className='cursor-pointer hover:scale-110'>
+			<Image src='/icons/search.svg' alt='search' width={32} height={32} />
+		</div>
+	);
 
 	useEffect(() => {
 		if (!location) return;
 
-		fetcher(`/api/search?q=${search}&lat=${location.lat}&lon=${location.lon}`)
-			.then((data) => setData(data.results));
+		fetcher(`/api/search?q=${search}&lat=${location.lat}&lon=${location.lon}`).then((data) => setData(data.results));
 	}, [search, location]);
 
 	return (
@@ -66,7 +60,7 @@ const Explore: NextPage = () => {
 									key={`${d.restaurantId}-${d.id}`}
 									title={d.name}
 									image={d.image}
-									href={`/restaurants/${d.restaurantId}/dishes/${d.id}`}
+									href={`/restaurants/${d.restaurantId}?dish=${d.id}`}
 									text={d.allergens.length ? `Allergens - ${d.allergens.join(', ')}` : 'No allergens!'}
 									subText={`${d.price} ₹`}
 								/>

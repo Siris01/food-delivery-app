@@ -22,7 +22,7 @@ export default function Nav() {
 	}, []);
 
 	return (
-		<nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/60 before:border-black'>
+		<nav className='sticky top-0 z-50 before:border-b-2 before:-z-1 before:content-[""] before:absolute before:w-full before:h-full before:backdrop-blur-lg before:backdrop-brightness-25 before:bg-black/75 before:border-black'>
 			<div className='relative text-white min-h-[96px] flex items-center justify-between px-4 p-2 mx-auto max-w-7xl sm:px-6 lg:px-8'>
 				<div className='flex ml-2 items-center flex-1'>
 					<Link href='/' className='flex items-center justify-center hover:text-primary'>

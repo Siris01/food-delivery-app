@@ -11,8 +11,7 @@ const Order: NextPage = () => {
 		const id = router.query.id;
 		if (!id) return;
 
-		fetcher(`/api/orders/${id}`)
-			.then((data) => setData(data));
+		fetcher(`/api/orders/${id}`).then((data) => setData(data));
 	}, [router.query.id]);
 
 	return (

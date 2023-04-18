@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { CartItem } from './cart';
+import { CartItem } from '@pages/cart';
 
 const Checkout: NextPage = () => {
 	const [data, setData] = useState<CartItem[]>([]);
@@ -19,7 +19,7 @@ const Checkout: NextPage = () => {
 				{data && data.length ? (
 					data.map((d) => (
 						<div key={d.id}>
-							{d.name} x {d.quantity}
+							{d.name} x <span className='text-primary'>{d.quantity}</span>
 						</div>
 					))
 				) : data ? (
@@ -28,7 +28,10 @@ const Checkout: NextPage = () => {
 					<span className='font-2xl text-primary font-bold'>Loading...</span>
 				)}
 			</div>
-			<span className='text-lg'>Total amount: {data?.map((d) => d.price * d.quantity)?.reduce((a, b) => a + b, 0)}</span>
+			<span className='text-lg'>
+				Total amount:{' '}
+				<span className='text-primary'>{data?.map((d) => d.price * d.quantity)?.reduce((a, b) => a + b, 0)}</span>
+			</span>
 		</div>
 	);
 };

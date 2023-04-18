@@ -3,7 +3,7 @@ interface Location {
 	lon: number;
 }
 
-export default function distance(location1: Location, location2: Location) {
+export default function calculateDistance(location1: Location, location2: Location) {
 	const { lat: lat1, lon: lon1 } = location1;
 	const { lat: lat2, lon: lon2 } = location2;
 

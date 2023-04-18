@@ -5,19 +5,14 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 const Logout: NextPage = () => {
-    useEffect(() => {
-        fetcher('/api/auth/logout')
-            .then(() => {
-                toast.success('Successfully logged out!');
-                router.push('/').then(() => router.reload());
-            })
-    }, [])
+	useEffect(() => {
+		fetcher('/api/auth/logout').then(() => {
+			toast.success('Successfully logged out!');
+			router.push('/').then(() => router.reload());
+		});
+	}, []);
 
-    return (
-        <div className='mx-auto my-auto'>
-            Logging out ...
-        </div>
-    );
+	return <div className='mx-auto my-auto'>Logging out ...</div>;
 };
 
 export default Logout;

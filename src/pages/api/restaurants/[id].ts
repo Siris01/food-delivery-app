@@ -4,12 +4,12 @@ import prisma from '@prisma';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== 'GET') return res.status(405).end();
 
-	const restaurantId = req.query.restaurantId as string;
-	if (!restaurantId) return res.status(400).end();
+	const id = req.query.id as string;
+	if (!id) return res.status(400).end();
 
 	const restaurant = await prisma.restaurants.findUnique({
 		where: {
-			id: parseInt(restaurantId)
+			id: parseInt(id)
 		}
 	});
 
@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const menu = (
 		await prisma.dishes.findMany({
 			where: {
-				restaurantId: parseInt(restaurantId)
+				restaurantId: parseInt(id)
 			}
 		})
 	).map((dish) => ({ ...dish, allergens: dish.allergens.split(',') }));
