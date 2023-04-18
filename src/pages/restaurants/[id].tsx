@@ -125,7 +125,10 @@ const RestaurantMenuCard = (props: RestaurantMenuCardProps) => {
 									onClick={() => {
 										props.setData((items) => {
 											const item = items!.find((i) => i.id === props.id)!;
-											item.quantity += c === '+' ? 1 : -1;
+
+											if (c === '+') item.quantity++;
+											else item.quantity--;
+
 											return [...items!.filter((i) => i.quantity > 0)];
 										});
 									}}

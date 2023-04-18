@@ -62,7 +62,9 @@ const CartItemCard = (props: CardItemCardProps) => {
 										if (!response) return items;
 									}
 
-									item.quantity += c === '+' ? 1 : -1;
+									if (c === '+') item.quantity++;
+									else item.quantity--;
+
 									return [...items!.filter((i) => i.quantity > 0)];
 								});
 							}}
