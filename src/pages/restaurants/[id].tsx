@@ -64,10 +64,7 @@ const Restaurant: NextPage = () => {
 					</div>
 					<h1 className='text-primary font-bold text-4xl'>{data.name}</h1>
 					<span className='font-medium text-md'>
-						Cuisine:{' '}
-						<span className='text-primary'>
-							{data.cuisine}
-						</span>
+						Cuisine: <span className='text-primary'>{data.cuisine}</span>
 					</span>
 					<span className='font-medium text-md'>
 						Location:{' '}
