@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import useLocation from '@hooks/useLocation';
 
 const Checkout: NextPage = () => {
-	const [data, _] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
+	const [data, _] = usePersistentState<CartItem[]>({ key: 'cart', initialData: [] });
 	const router = useRouter();
 	const { location } = useLocation();
 
