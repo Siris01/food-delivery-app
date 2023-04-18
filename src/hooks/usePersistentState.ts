@@ -16,7 +16,7 @@ export default function usePersistentState<T>(props: Props<T>) {
 	const setState = (mutate: ((data: T) => T) | T) => {
 		if (typeof mutate === 'function') {
 			const evaluated = (mutate as Function)(state);
-			set(mutate);
+			set(evaluated);
 			localStorage.setItem(props.key, JSON.stringify(evaluated));
 		} else {
 			set(mutate);
