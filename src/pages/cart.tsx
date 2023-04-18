@@ -9,7 +9,7 @@ export type CartItem = Omit<DishItem, 'type'> & {
 };
 
 const Cart: NextPage = () => {
-	const [data, setData] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
+	const [data, setData] = usePersistentState<CartItem[]>({ key: 'cart', initialData: [] });
 
 	return (
 		<div className='flex flex-col items-center justify-center m-4'>

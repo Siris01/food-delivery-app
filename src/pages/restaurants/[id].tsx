@@ -18,7 +18,7 @@ export type Restaurant = Omit<RestaurantItem, 'type'> & {
 
 const Restaurant: NextPage = () => {
 	const [data, setData] = useState<Restaurant | null>(null);
-	const [cart, setCart] = usePersistentState<CartItem[]>({ key: 'cart', defaultValue: [] });
+	const [cart, setCart] = usePersistentState<CartItem[]>({ key: 'cart', initialData: [] });
 	const router = useRouter();
 	const { location } = useLocation();
 
