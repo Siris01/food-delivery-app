@@ -54,7 +54,7 @@ export default Checkout;
 
 const confirmOrder = async (items: CartItem[], location: { lat: number; lon: number }) => {
 	const order = await fetcher('/api/orders', { method: 'POST', body: JSON.stringify({ items, location }) });
-	if (!order) return;
+	if (!order?.id) return;
 
 	toast.success(`Order confirmed! [ID = ${order.id}]`);
 	return order.id;

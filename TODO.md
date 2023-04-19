@@ -1,4 +1,3 @@
 - use OOP
 - Remove todos in code
-- Fix weird artifacts in dishitemcard (inside restaurant menu)
 - Check signed in status before "confirm order" button
