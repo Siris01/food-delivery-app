@@ -1,3 +1,4 @@
+# TODO
+
 - use OOP
 - Remove todos in code
-- Check signed in status before "confirm order" button

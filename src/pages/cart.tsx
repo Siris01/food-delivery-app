@@ -78,5 +78,3 @@ const CartItemCard = (props: CardItemCardProps) => {
 		</div>
 	);
 };
-
-//TODO: Sync react state to backend/localstorage

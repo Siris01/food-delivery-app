@@ -42,4 +42,3 @@ const Order: NextPage = () => {
 };
 
 export default Order;
-//TODO: What 3 words integration here

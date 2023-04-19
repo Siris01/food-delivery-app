@@ -7,9 +7,6 @@ import Card from '@components/Card';
 import fetcher from '@utils/fetcher';
 import useLocation from '@hooks/useLocation';
 
-//TODO: Search bar with filtering by restaurant, cuisine, price, restaurant, rating, food name.
-//TODO: Check cuisine search param in useEffect to fetch /api/search?q={cuisine}
-
 const Explore: NextPage = () => {
 	const [search, setSearch] = useState('');
 	const [data, setData] = useState<SearchItem[] | null>(null);
