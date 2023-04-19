@@ -13,9 +13,8 @@ interface CardProps {
 const Card = (props: CardProps) => {
 	const card = (
 		<div
-			className={`inline-flex flex-row items-center p-2 m-2 min-w-[24rem] max-w-[24rem] shadow border-2 border-black rounded-lg bg-black/70 ${
-				!props.disableHoverEffects && 'hover:border-primary hover:scale-105'
-			}`}
+			className={`inline-flex flex-row items-center p-2 m-2 min-w-[20rem] max-w-[20rem] shadow border-2 border-black rounded-lg bg-black/70 ${!props.disableHoverEffects && 'hover:border-primary hover:scale-105'
+				}`}
 		>
 			<div className='relative min-h-[12rem] min-w-[6rem]'>
 				<Image fill src={props.image} alt={'Image of restaurant/dish'} className='object-cover rounded-lg' />
@@ -38,7 +37,7 @@ export default Card;
 
 export const LoadingCard = () => {
 	return (
-		<div className='flex flex-row p-2 m-2 min-w-[24rem] max-w-[24rem] items-center border-2 border-black rounded-lg shadow bg-black/20'>
+		<div className='flex flex-row p-2 m-2 min-w-[20rem] max-w-[20rem] items-center border-2 border-black rounded-lg shadow bg-black/20'>
 			<div className='relative h-48 w-24 bg-zinc-400 animate-pulse rounded-lg' />
 			<div className='flex flex-col justify-around p-4 w-full h-full'>
 				<div className='flex flex-row mb-2 justify-around items-center'>

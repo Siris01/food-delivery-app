@@ -1,5 +1,3 @@
-- Set cookie age in api routes
-- Check cuisine as 1st step
 - use OOP
 - Remove todos in code
 - Fix weird artifacts in dishitemcard (inside restaurant menu)

@@ -75,7 +75,7 @@ const Restaurant: NextPage = () => {
 					</span>
 					<p className='text-lg font-medium'>{data.about}</p>
 					<span className='my-6 text-center text-3xl font-bold text-primary'>Menu</span>
-					<div className='mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+					<div className='mb-4 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
 						{data.menu.map((d) => (
 							<RestaurantMenuCard
 								key={d.id}
