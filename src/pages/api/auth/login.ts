@@ -26,9 +26,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	res
 		.setHeader('Set-Cookie', [
-			`token=${session.token}; Path=/; HttpOnly; Secure`,
-			`username=${user.username}; Path=/; Secure`
+			`token=${session.token}; Path=/; HttpOnly; Secure; Max-Age=${MAX_AGE}`,
+			`username=${user.username}; Path=/; Secure; Max-Age=${MAX_AGE}`
 		])
 		.status(204)
 		.end();
 }
+
+const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
