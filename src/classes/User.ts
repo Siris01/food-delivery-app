@@ -25,7 +25,7 @@ class User {
 	}
 
 	public create(user: Omit<User, 'id'>): User {
-		//TODO: Add to db here and retrive id
+		//TODO: Add to db here and retrieve id
 		return new User({ ...user, id: 1 });
 	}
 }
