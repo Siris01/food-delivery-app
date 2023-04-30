@@ -23,12 +23,13 @@ const Orders: NextPage = () => {
 						.sort((b, a) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
 						.map((d) => (
 							<div key={d.id}>
-								<Link href={`/orders/${d.id}`} className='text-primary hover:underline'>
-									Order #{d.id}
-								</Link>{' '}
+								<span>Order #{d.id}</span>{' '}
 								<span>
 									({d.eta ? `Arriving in ${accurateDiff(Math.round(new Date(d.eta).getTime() / 1000))}` : d.status})
-								</span>
+								</span>{' '}
+								<Link target='_blank' href={`/invoices/${d.id}`} className='text-primary hover:underline font-medium'>
+									View invoice
+								</Link>
 							</div>
 						))
 				) : data ? (

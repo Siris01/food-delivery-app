@@ -58,6 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				eta: new Date(Date.now() + eta * 1000)
 			}
 		});
+		setTimeout(updateStatus, eta * 1000);
 	} else res.status(405).end();
 }
 
@@ -93,4 +94,25 @@ const calculateETA = async (items: { id: number }[], location: { lat: number; lo
 	const SPEED = 60; // kmph
 
 	return Math.round(((TO_AND_FRO_FACTOR * Math.max(...distances)) / SPEED) * 60 * 60); // in seconds
+};
+
+const updateStatus = async () => {
+	const orders = await prisma.orders.findMany({
+		where: {
+			status: 'processing',
+			eta: {
+				lte: new Date()
+			}
+		}
+	});
+
+	for (const order of orders) {
+		await prisma.orders.update({
+			where: { id: order.id },
+			data: {
+				status: 'delivered',
+				eta: null
+			}
+		});
+	}
 };

@@ -33,10 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const lat = req.query.lat as string;
 	const lon = req.query.lon as string;
 
-	if (cuisines.map((c) => c.title.toLowerCase()).includes(query)) {
-		// TODO: Search for restaurants with the given cuisine
-	}
-
 	const results: SearchItem[] = [];
 
 	const dishes = await prisma.dishes.findMany({

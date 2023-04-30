@@ -12,6 +12,13 @@
 		@apply transition-all delay-[50] ease-out;
 	}
 
+	table,
+	th,
+	tr,
+	td {
+		@apply border-dashed border-2 border-black text-center p-4;
+	}
+
 	body {
 		font-smooth: auto;
 		overflow-x: hidden;
