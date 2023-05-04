@@ -27,7 +27,7 @@ const Orders: NextPage = () => {
 								<span>
 									({d.eta ? `Arriving in ${accurateDiff(Math.round(new Date(d.eta).getTime() / 1000))}` : d.status})
 								</span>{' '}
-								<Link target='_blank' href={`/invoices/${d.id}`} className='text-primary hover:underline font-medium'>
+								<Link href={`/invoices/${d.id}`} className='text-primary hover:underline font-medium'>
 									View invoice
 								</Link>
 							</div>

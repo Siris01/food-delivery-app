@@ -39,7 +39,7 @@ const Checkout: NextPage = () => {
 						const id = await confirmOrder(data ?? [], location!);
 						if (!id) return;
 
-						setTimeout(() => router.push(`/orders/${id}`), 500);
+						setTimeout(() => router.push('/orders'), 500);
 					}}
 					className='p-2 px-4 m-2 font-bold bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
 				>
