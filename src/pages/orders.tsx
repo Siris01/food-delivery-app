@@ -1,4 +1,4 @@
-import { Order } from '@api/orders';
+import { IOrder } from '@classes/Order';
 import fetcher from '@utils/fetcher';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { accurateDiff } from '@utils/date';
 
 const Orders: NextPage = () => {
-	const [data, setData] = useState<Order[] | null>(null);
+	const [data, setData] = useState<IOrder[] | null>(null);
 
 	useEffect(() => {
 		fetcher('/api/orders').then((data) => setData(data.orders));

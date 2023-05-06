@@ -45,7 +45,7 @@ export default class Order {
 			}
 		});
 
-		return orders;
+		return { orders };
 	}
 
 	static async CreateOrder(items: CartItem[], location: ILoc, userId: number) {
