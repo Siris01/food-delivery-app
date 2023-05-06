@@ -1,9 +1,6 @@
-interface Location {
-	lat: number;
-	lon: number;
-}
+import { ILoc } from '@classes/Order';
 
-export default function calculateDistance(location1: Location, location2: Location) {
+export default function calculateDistance(location1: ILoc, location2: ILoc) {
 	const { lat: lat1, lon: lon1 } = location1;
 	const { lat: lat2, lon: lon2 } = location2;
 
