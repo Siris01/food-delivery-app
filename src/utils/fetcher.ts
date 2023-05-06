@@ -18,7 +18,9 @@ export default async function fetcher(url: string, options: RequestInit = {}): P
 		}
 	}
 
-	if (res.headers.has('Content-Type')) toast.error(await res.text());
+	const content = await res.text();
+
+	if (content.length >= 5 && content.length <= 50) toast.error(content);
 	else toast.error(`An error occurred, status code: ${res.status}`);
 	return { ok: false };
 }

@@ -1,56 +1,143 @@
-import Cart, { CartProps } from '@classes/Cart';
 import prisma from '@prisma';
+import { CartItem } from '@pages/cart';
+import OpenLocationCode from '@utils/plusCodes';
+import calculateDistance from '@utils/calculateDistance';
 
-export interface OrderProps extends CartProps {
+export interface IOrder {
 	id: number;
 	createdAt: Date;
-	deliveryAddress: string;
+	eta?: Date;
+	status: string;
+	items?: CartItem[];
 }
 
-class Order extends Cart {
-	public id: number;
-	public createdAt: Date;
-	public deliveryAddress: string;
+export interface ILoc {
+	lat: number;
+	lon: number;
+}
 
-	constructor(dataMembers: OrderProps) {
-		super(dataMembers);
-		const { id, createdAt, deliveryAddress } = dataMembers;
+export default class Order {
+	id: number;
 
+	constructor(id: number) {
 		this.id = id;
-		this.createdAt = createdAt;
-		this.deliveryAddress = deliveryAddress;
 	}
 
-	public get eta(): Date {
-		const eta = new Date(this.createdAt);
-		eta.setMinutes(eta.getMinutes() + 30); //TODO: calculate ETA based on restaurant location(s)?
-		return eta;
+	async getDetails(userId: number) {
+		const order = await prisma.orders.findUnique({ where: { id: this.id } });
+
+		if (!order) throw new Error('Order not found');
+		if (order.userId !== userId) throw new Error('Unauthorized');
+
+		const items = await prisma.order_items.findMany({
+			where: {
+				orderId: order.id
+			}
+		});
+
+		return { ...order, items };
 	}
 
-	public get status(): string {
-		return this.eta > new Date(Date.now()) ? 'Preparing' : 'Delivering';
-		//TODO: ^^ Fix this
+	static async getOrdersOfUser(userId: number) {
+		const orders = await prisma.orders.findMany({
+			where: {
+				userId
+			}
+		});
+
+		return orders;
 	}
 
-	public static async fromDB(id: number): Promise<Order> {
-		const order = await prisma.orders.findUnique({ where: { id } });
-		if (!order) throw new Error(`Order ${id} not found`);
+	static async CreateOrder(items: CartItem[], location: ILoc, userId: number) {
+		if (!location || !location.lat || !location.lon) throw new Error('Missing location');
+		if (items?.length === 0) throw new Error('Missing items');
 
-		const items = await prisma.order_items.findMany({ where: { orderId: id } });
-		const cart = new Cart({ userId: order.userId, items: [] });
+		const order = await prisma.orders.create({
+			data: {
+				status: 'pending',
+				userId: userId,
+				deliveryAddress: OpenLocationCode.encode(location.lat, location.lon)
+			}
+		});
 
-		for (const item of items) {
-			const dish = await prisma.dishes.findUnique({ where: { id: item.dishId } });
-			if (!dish) throw new Error(`Dish ${item.dishId} not found`);
-
-			const allergens = dish.allergens.split(',') as string[];
-
-			cart.addItem({ ...dish, allergens });
-			cart.changeQuantity(dish.id, item.quantity - 1);
+		for (const item of items as CartItem[]) {
+			await prisma.order_items.create({
+				data: {
+					quantity: item.quantity,
+					dishId: item.id,
+					orderId: order.id
+				}
+			});
 		}
 
-		return new Order({ ...order, items: cart.items });
+		this.processOrder(order.id, items, location);
+		return { id: order.id };
+	}
+
+	static async processOrder(id: number, items: CartItem[], location: ILoc) {
+		const eta = await this.calculateETA(items, location);
+		await prisma.orders.update({
+			where: { id },
+			data: {
+				status: 'processing',
+				eta: new Date(Date.now() + eta * 1000)
+			}
+		});
+		setTimeout(this.updateStatus, eta * 1000);
+	}
+
+	static async calculateETA(items: { id: number }[], location: ILoc) {
+		const restaurants = (
+			await prisma.dishes.findMany({
+				where: {
+					id: { in: items.map((i) => i.id) }
+				},
+				select: {
+					restaurantId: true
+				}
+			})
+		).map((d) => d.restaurantId);
+
+		const locations = (
+			await prisma.restaurants.findMany({
+				where: {
+					id: { in: restaurants }
+				},
+				select: {
+					location: true
+				}
+			})
+		).map((r) => r.location);
+
+		const distances = locations.map((l) => {
+			const resLocation = OpenLocationCode.decode(l);
+			return calculateDistance(location, { lat: resLocation.latitudeCenter, lon: resLocation.longitudeCenter });
+		});
+
+		const TO_AND_FRO_FACTOR = 1.25;
+		const SPEED = 60; // kmph
+
+		return Math.round(((TO_AND_FRO_FACTOR * Math.max(...distances)) / SPEED) * 60 * 60); // in seconds
+	}
+
+	static async updateStatus() {
+		const orders = await prisma.orders.findMany({
+			where: {
+				status: 'processing',
+				eta: {
+					lte: new Date()
+				}
+			}
+		});
+
+		for (const order of orders) {
+			await prisma.orders.update({
+				where: { id: order.id },
+				data: {
+					status: 'delivered',
+					eta: null
+				}
+			});
+		}
 	}
 }
-
-export default Order;

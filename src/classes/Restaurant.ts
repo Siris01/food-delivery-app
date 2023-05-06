@@ -1,48 +1,29 @@
-import Dish from '@classes/Dish';
 import prisma from '@prisma';
 
-export interface RestaurantProps {
+export default class Restaurant {
 	id: number;
-	name: string;
-	image: string;
-	about: string;
-	location: string;
-	cuisine: string;
-	dishes: Dish[];
-}
 
-class Restaurant {
-	public id: number;
-	public name: string;
-	public image: string;
-	public about: string;
-	public location: string;
-	public dishes: Dish[];
-
-	constructor(dataMembers: RestaurantProps) {
-		const { id, name, image, about, location, dishes } = dataMembers;
-
+	constructor(id: number) {
 		this.id = id;
-		this.name = name;
-		this.image = image;
-		this.about = about;
-		this.location = location;
-		this.dishes = dishes;
 	}
 
-	public calculateDistance(location: string): number {
-		return 1.5; //TODO: calculate distance
-	}
+	async getDetails() {
+		const restaurant = await prisma.restaurants.findUnique({
+			where: {
+				id: this.id
+			}
+		});
 
-	public static async fromDB(id: number): Promise<Restaurant> {
-		const restaurant = await prisma.restaurants.findUnique({ where: { id } });
-		if (!restaurant) throw new Error(`Restaurant ${id} not found`);
+		if (!restaurant) throw new Error('Restaurant not found');
 
-		const rawDishes = await prisma.dishes.findMany({ where: { restaurantId: id } });
-		const dishes = await Promise.all(rawDishes.map(async (d) => await Dish.fromDB(d.id)));
+		const menu = (
+			await prisma.dishes.findMany({
+				where: {
+					restaurantId: this.id
+				}
+			})
+		).map((dish) => ({ ...dish, allergens: dish.allergens.split(',') }));
 
-		return new Restaurant({ ...restaurant, dishes });
+		return { ...restaurant, menu };
 	}
 }
-
-export default Restaurant;

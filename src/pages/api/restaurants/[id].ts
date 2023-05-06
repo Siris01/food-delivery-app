@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@prisma';
+import Restaurant from '@classes/Restaurant';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== 'GET') return res.status(405).end();
@@ -7,21 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const id = req.query.id as string;
 	if (!id) return res.status(400).end();
 
-	const restaurant = await prisma.restaurants.findUnique({
-		where: {
-			id: parseInt(id)
-		}
-	});
+	const restaurant = new Restaurant(parseInt(id));
 
-	if (!restaurant) return res.status(404).end();
-
-	const menu = (
-		await prisma.dishes.findMany({
-			where: {
-				restaurantId: parseInt(id)
-			}
-		})
-	).map((dish) => ({ ...dish, allergens: dish.allergens.split(',') }));
-
-	res.status(200).json({ ...restaurant, menu });
+	try {
+		res.json(await restaurant.getDetails());
+	} catch (e: any) {
+		res.status(400).send(e.message);
+	}
 }

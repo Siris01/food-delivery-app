@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { cuisines } from '@pages/explore';
 import prisma from '@prisma';
 import calculateDistance from '@utils/calculateDistance';
 import OpenLocationCode from '@utils/plusCodes';
