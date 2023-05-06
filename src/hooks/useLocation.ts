@@ -1,8 +1,7 @@
-import { ILoc } from '@classes/Order';
 import { useState, useEffect } from 'react';
 
 export default function useLocation() {
-	const [location, setLocation] = useState<ILoc>();
+	const [location, setLocation] = useState<{ lat: number; lon: number }>();
 
 	useEffect(() => {
 		if (navigator.geolocation) {

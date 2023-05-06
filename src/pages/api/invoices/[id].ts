@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getSession from '@utils/session';
+import { getSession } from '@utils/getSession';
 import Invoice from '@classes/Invoice';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

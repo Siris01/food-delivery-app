@@ -1,7 +1,7 @@
 import prisma from '@prisma';
-import type { NextApiRequest } from 'next';
+import { NextApiRequest } from 'next';
 
-export default async function getSession(req: NextApiRequest) {
+export const getSession = async (req: NextApiRequest) => {
 	const token = req.cookies.token;
 	if (!token) return null;
 
@@ -12,4 +12,4 @@ export default async function getSession(req: NextApiRequest) {
 	});
 
 	return session;
-}
+};
