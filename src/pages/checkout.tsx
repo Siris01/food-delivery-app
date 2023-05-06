@@ -5,6 +5,8 @@ import fetcher from '@utils/fetcher';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import useLocation from '@hooks/useLocation';
+import { ILoc } from '@classes/Order';
+import getUsername from '@utils/username';
 
 const Checkout: NextPage = () => {
 	const [data, _] = usePersistentState<CartItem[]>({ key: 'cart', initialData: [] });
@@ -36,8 +38,7 @@ const Checkout: NextPage = () => {
 				</span>
 				<button
 					onClick={async () => {
-						const cookies = document.cookie.split(';').map((c) => c.trim());
-						const username = cookies.find((cookie) => cookie.startsWith('username='))?.split('=')?.[1];
+						const username = getUsername();
 						if (!username) return router.push('/login');
 
 						if (!(await confirmOrder(data ?? [], location!))) return;
@@ -54,7 +55,7 @@ const Checkout: NextPage = () => {
 
 export default Checkout;
 
-const confirmOrder = async (items: CartItem[], location: { lat: number; lon: number }) => {
+const confirmOrder = async (items: CartItem[], location: ILoc) => {
 	const order = await fetcher('/api/orders', { method: 'POST', body: JSON.stringify({ items, location }) });
 	if (!order?.id) return;
 

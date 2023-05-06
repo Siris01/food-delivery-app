@@ -2,6 +2,7 @@ import Logo from '@components/Logo';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Spin as Hamburger } from 'hamburger-react';
+import getUsername from '@utils/username';
 
 const links = [
 	{ title: 'Home', href: '/' },
@@ -15,8 +16,7 @@ export default function Nav() {
 	const [loggedInAs, setLoggedInAs] = useState<null | string>(null);
 
 	useEffect(() => {
-		const cookies = document.cookie.split(';').map((c) => c.trim());
-		const username = cookies.find((cookie) => cookie.startsWith('username='))?.split('=')?.[1];
+		const username = getUsername();
 
 		if (username) setLoggedInAs(username);
 	}, []);
