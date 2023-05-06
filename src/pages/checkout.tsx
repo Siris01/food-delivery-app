@@ -36,9 +36,11 @@ const Checkout: NextPage = () => {
 				</span>
 				<button
 					onClick={async () => {
-						const id = await confirmOrder(data ?? [], location!);
-						if (!id) return;
+						const cookies = document.cookie.split(';').map((c) => c.trim());
+						const username = cookies.find((cookie) => cookie.startsWith('username='))?.split('=')?.[1];
+						if (!username) return router.push('/login');
 
+						if (!(await confirmOrder(data ?? [], location!))) return;
 						setTimeout(() => router.push('/orders'), 500);
 					}}
 					className='p-2 px-4 m-2 font-bold bg-dualtone hover:bg-dualtone/70 text-primary rounded-md'
